@@ -1,0 +1,13 @@
+[Unit]
+Description=GitHub Actions Runner
+After=network.target
+
+[Service]
+ExecStart=/home/nodashin/actions-runner/run.sh
+WorkingDirectory=/home/nodashin/actions-runner
+Restart=always
+KillMode=process
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
