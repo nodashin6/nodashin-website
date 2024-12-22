@@ -5,10 +5,9 @@ After=network.target
 [Service]
 ExecStart=/home/nodashin/.volta/bin/npm run serve
 WorkingDirectory=/home/nodashin/www/nodashin-website/website
-Restart=always
+Restart=never
 Environment=NODE_ENV=production
 KillMode=process
-RestartSec=10
 
 [Install]
 WantedBy=default.target
