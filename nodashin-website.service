@@ -1,0 +1,14 @@
+[Unit]
+Description=Node.js Website Service
+After=network.target
+
+[Service]
+ExecStart=/home/nodashin/.volta/bin/npm run serve
+WorkingDirectory=/home/nodashin/www/nodashin-website/website
+Restart=always
+Environment=NODE_ENV=production
+KillMode=process
+RestartSec=10
+
+[Install]
+WantedBy=default.target

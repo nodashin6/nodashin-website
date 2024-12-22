@@ -1,0 +1,37 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Stop server
+        run: |
+          systemctl --user stop nodashin-website || true
+
+      - name: Update code
+        run: |
+          cd ~/www/nodashin-website
+          git pull
+
+      - name: Build website
+        run: |
+          cd ~/www/nodashin-website/website
+          npm install
+          npm run build
+
+      - name: Start server
+        run: |
+          systemctl --user start nodashin-website
+
+      - name: Verify server is running
+        run: |
+          systemctl --user status nodashin-website
