@@ -4,32 +4,29 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Rocket is fast',
+    Svg: require('@site/static/img/f_f_traffic_46_svg_f_traffic_46_2nbg.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        If you stay in the sky for too long, you might get attacked by a rocket.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Paper is made from trees',
+    Svg: require('@site/static/img/f_f_business_91_svg_f_business_91_0nbg.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        We should be mindful not to waste paper. By using it responsibly, we can help conserve natural resources and reduce environmental impact. Simple actions like printing double-sided or reusing scrap paper can make a big difference in protecting our planet.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Humberger is delicious',
+    Svg: require('@site/static/img/f_f_health_37_svg_f_health_37_1nbg.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Avoid eating too many hamburgers to maintain good health. Consuming them in moderation helps prevent excessive calorie and fat intake, supporting a balanced diet and overall well-being. Opt for healthier alternatives when possible.
       </>
     ),
   },

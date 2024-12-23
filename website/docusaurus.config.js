@@ -15,7 +15,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const config = {
   title: 'Nodashin.com',
   tagline: 'Welcome to my personal website!',
-  favicon: 'img/favicon.ico',
+  favicon: 'nodashin-website-Logo.svg',
 
   // Set the production url of your site here
   url: 'http://nodashin.com',
@@ -78,14 +78,14 @@ const config = {
         title: 'nodashin.com',
         logo: {
           alt: 'Logo',
-          src: 'img/logo.svg',
+          src: 'img/nodashin-website-Logo.svg',
         },
         items: [
           {
             type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
+            sidebarId: 'pythonSidebar',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Python',
           },
           {to: '/blog', label: 'Blog', position: 'left'},
         ],
