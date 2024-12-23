@@ -1,0 +1,104 @@
+---
+sidebar_position: 2
+id: install-python
+title: インストール
+---
+
+## pyenvを用いる
+
+### pyenvをインストールする
+
+まず、pyenvをインストールします。以下のコマンドを実行してください。
+
+```bash
+$ curl https://pyenv.run | bash
+```
+
+次に、以下の行をシェルの設定ファイル（例：~/.bashrc または ~/.zshrc）に追加します。
+
+```bash
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+```
+
+設定ファイルを再読み込みします。
+
+```bash
+$ source ~/.bashrc
+```
+
+### pyenvを通じてPythonをインストールする
+
+pyenvを使用してPythonの特定のバージョンをインストールします。
+
+```bash
+$ pyenv install 3.8.10
+$ pyenv global 3.8.10
+```
+
+インストールされたPythonのバージョンを確認します。
+
+```bash
+$ python --version
+Python 3.8.10
+```
+
+## poetryを用いる
+
+### poetryをインストールする
+
+poetryをインストールします。以下のコマンドを実行してください。
+
+```bash
+$ curl -sSL https://install.python-poetry.org | python3 -
+```
+
+インストールが完了したら、以下のコマンドで新しいプロジェクトを作成します。
+
+```bash
+$ poetry new my-project
+$ cd my-project
+```
+
+### poetryを通じてパッケージを管理する
+
+requestsパッケージを追加します。
+
+```bash
+$ poetry add requests
+```
+
+スクリプトを実行します。
+
+```bash
+$ poetry run python my-script.py
+```
+
+## pipenvを用いる
+
+使わないでください。
+
+## Condaを用いる
+
+使わないでください。
+
+## インストールの確認
+
+Pythonとpipのバージョンを確認します。
+
+```bash
+$ python --version
+Python 3.8.10
+```
+
+```bash
+$ pip --version
+pip 21.0.1 from /usr/local/lib/python3.8/site-packages/pip (python 3.8)
+```
+
+## まとめ
+
+Pythonのインストール方法は複数ありますが、pyenv、poetry、pipenv、pip、Conda、Dockerなどを使用することで、環境に合わせて柔軟にインストールすることができます。Pythonのバージョンやパッケージ管理の方法など、プロジェクトの要件に応じて適切な方法を選択し、効率的に開発を進めることが重要です。
+

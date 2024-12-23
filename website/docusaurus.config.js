@@ -13,9 +13,9 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Nodashin.com',
+  title: 'nodashin.com',
   tagline: 'Welcome to my personal website!',
-  favicon: 'nodashin-website-Logo.svg',
+  favicon: 'img/chart_vertical_bar_chart_icon_264076.ico',
 
   // Set the production url of your site here
   url: 'http://nodashin.com',
