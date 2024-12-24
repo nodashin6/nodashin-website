@@ -1,0 +1,65 @@
+---
+sidebar_position: 3
+id: hello-world
+title: 最初のプログラム
+---
+
+## pyproject.tomlの作成
+
+プロジェクトのルートディレクトリに`pyproject.toml`を作成します。
+
+## poetryのインストール
+
+### poetryをインストールする
+
+以下のコマンドを実行してpoetryをインストールします。
+
+```bash
+$ curl -sSL https://install.python-poetry.org | python3 -
+```
+
+## 仮想環境の作成
+
+グローバル環境にパッケージをインストールしないようにしてください。ローカル環境または`AppData`に仮想環境を作成します。
+
+### ローカルに仮想環境を作成する
+
+`.venv`が作成されます。
+
+### AppDataに仮想環境を作成する
+
+AppData内に仮想環境が作成されます。
+
+:::tip
+pipenvやcondaは使用しないでください。
+:::
+
+インストールが完了したら、以下のコマンドで新しいプロジェクトを作成します。
+
+```bash
+$ poetry new my-project
+$ cd my-project
+```
+
+### パッケージの管理
+
+`requests`パッケージを追加します。
+
+```bash
+$ poetry add requests
+```
+
+### スクリプトの作成と実行
+
+以下の内容で`hello_world.py`スクリプトを作成します。
+
+```python
+# hello_world.py
+print("Hello world")
+```
+
+スクリプトを実行します。
+
+```bash
+$ poetry run python hello_world.py
+```
