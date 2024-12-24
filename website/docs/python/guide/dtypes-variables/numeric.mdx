@@ -3,3 +3,157 @@ sidebar_position: 1
 id: numeric
 title: 数値
 ---
+
+## 数値型の基本
+
+Pythonには、整数型 (`int`)、浮動小数点数型 (`float`)、複素数型 (`complex`) の3つの主要な数値型があります。
+
+```python
+integer_value = 42
+float_value = 3.14
+complex_value = 1 + 2j
+```
+
+## 数値型の操作
+
+### 算術演算
+
+Pythonでは、基本的な算術演算をサポートしています。これには、加算 (`+`)、減算 (`-`)、乗算 (`*`)、除算 (`/`)、整数除算 (`//`)、剰余 (`%`)、累乗 (`**`) などがあります。
+
+```python
+a = 10
+b = 3
+
+print(a + b)  # 13
+print(a - b)  # 7
+print(a * b)  # 30
+print(a / b)  # 3.3333333333333335
+print(a // b)  # 3
+print(a % b)  # 1
+print(a ** b)  # 1000
+```
+
+### 数値型の変換
+
+数値型は、`int()`、`float()`、`complex()` 関数を使って相互に変換することができます。
+
+```python
+x = 42
+y = 3.14
+
+print(float(x))  # 42.0
+print(int(y))  # 3
+print(complex(x))  # (42+0j)
+```
+
+### 数学関数
+
+Pythonの標準ライブラリには、`math` モジュールが含まれており、さまざまな数学関数を提供しています。
+
+```python
+import math
+
+print(math.sqrt(16))  # 4.0
+print(math.sin(math.pi / 2))  # 1.0
+print(math.log(100, 10))  # 2.0
+```
+
+### ランダム数の生成
+
+Pythonの `random` モジュールを使って、ランダムな数値を生成することができます。
+
+```python
+import random
+
+print(random.randint(1, 10))  # 1から10のランダムな整数
+print(random.random())  # 0.0から1.0のランダムな浮動小数点数
+```
+
+### 数値のフォーマット
+
+数値を文字列としてフォーマットする方法はいくつかあります。`%` 演算子、`str.format()` メソッド、f文字列（フォーマット済み文字列リテラル）などが使用できます。
+
+```python
+value = 123.456
+
+# % 演算子
+formatted_str = "%.2f" % value
+print(formatted_str)  # 123.46
+
+# str.format() メソッド
+formatted_str = "{:.2f}".format(value)
+print(formatted_str)  # 123.46
+
+# f文字列
+formatted_str = f"{value:.2f}"
+print(formatted_str)  # 123.46
+```
+
+### ビット演算
+
+Pythonでは、ビット演算をサポートしています。これには、ビットごとのAND (`&`)、OR (`|`)、XOR (`^`)、NOT (`~`)、左シフト (`<<`)、右シフト (`>>`) などがあります。
+
+```python
+a = 0b1010  # 10
+b = 0b1100  # 12
+
+print(bin(a & b))  # 0b1000
+print(bin(a | b))  # 0b1110
+print(bin(a ^ b))  # 0b0110
+print(bin(~a))  # -0b1011
+print(bin(a << 2))  # 0b101000
+print(bin(a >> 2))  # 0b10
+```
+
+### 数値の比較
+
+数値の比較には、比較演算子を使用します。これには、等しい (`==`)、等しくない (`!=`)、より大きい (`>`)、より小さい (`<`)、以上 (`>=`)、以下 (`<=`) などがあります。
+
+```python
+a = 10
+b = 20
+
+print(a == b)  # False
+print(a != b)  # True
+print(a > b)  # False
+print(a < b)  # True
+print(a >= b)  # False
+print(a <= b)  # True
+```
+
+### 数値の丸め
+
+Pythonでは、`round()` 関数を使って数値を丸めることができます。`round()` 関数は、指定された小数点以下の桁数に基づいて数値を丸めます。
+
+```python
+value = 123.456
+
+print(round(value))  # 123
+print(round(value, 1))  # 123.5
+print(round(value, 2))  # 123.46
+```
+
+### 数値の絶対値
+
+数値の絶対値を取得するには、`abs()` 関数を使用します。
+
+```python
+value = -42
+
+print(abs(value))  # 42
+```
+
+### 数値の最大値と最小値
+
+数値の最大値と最小値を取得するには、`max()` 関数と `min()` 関数を使用します。
+
+```python
+values = [1, 2, 3, 4, 5]
+
+print(max(values))  # 5
+print(min(values))  # 1
+```
+
+### まとめ
+
+Pythonの数値型は非常に強力で柔軟です。基本的な操作から高度な操作まで、さまざまな方法を駆使して効率的に数値を扱うことができます。これらのテクニックを活用して、Pythonプログラミングのスキルを向上させましょう。

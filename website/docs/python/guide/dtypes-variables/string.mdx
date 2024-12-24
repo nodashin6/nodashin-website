@@ -3,3 +3,152 @@ sidebar_position: 2
 id: string
 title: 文字列
 ---
+
+## 文字列の基本
+
+Pythonの文字列は、シングルクォート (`'`) またはダブルクォート (`"`) で囲んで表現します。どちらを使用しても同じ意味を持ちます。
+
+```python
+single_quote_str = 'Hello, world!'
+double_quote_str = "Hello, world!"
+```
+
+## 文字列の操作
+
+### 文字列の連結
+
+文字列は `+` 演算子を使って連結することができます。
+
+```python
+greeting = "Hello"
+name = "Alice"
+message = greeting + ", " + name + "!"
+print(message)  # Hello, Alice!
+```
+
+### 文字列の繰り返し
+
+文字列は `*` 演算子を使って繰り返すことができます。
+
+```python
+repeat_str = "Hello! " * 3
+print(repeat_str)  # Hello! Hello! Hello!
+```
+
+### 文字列のインデックスとスライス
+
+文字列はインデックスを使ってアクセスすることができます。インデックスは0から始まります。また、スライスを使って部分文字列を取得することもできます。
+
+```python
+text = "Python"
+first_char = text[0]
+last_char = text[-1]
+substring = text[1:4]
+
+print(first_char)  # P
+print(last_char)   # n
+print(substring)   # yth
+```
+
+### 文字列のフォーマット
+
+Pythonには複数の文字列フォーマット方法があります。`%` 演算子、`str.format()` メソッド、f文字列（フォーマット済み文字列リテラル）などが使用できます。
+
+```python
+name = "Alice"
+age = 30
+
+# % 演算子
+formatted_str = "Name: %s, Age: %d" % (name, age)
+print(formatted_str)  # Name: Alice, Age: 30
+
+# str.format() メソッド
+formatted_str = "Name: {}, Age: {}".format(name, age)
+print(formatted_str)  # Name: Alice, Age: 30
+
+# f文字列
+formatted_str = f"Name: {name}, Age: {age}"
+print(formatted_str)  # Name: Alice, Age: 30
+```
+
+### 文字列メソッド
+
+Pythonの文字列には多くの便利なメソッドがあります。以下にいくつかの例を示します。
+
+```python
+text = "  Hello, World!  "
+
+# 大文字・小文字変換
+print(text.upper())  # HELLO, WORLD!
+print(text.lower())  # hello, world!
+
+# 文字列の検索
+print(text.find("World"))  # 8
+print(text.startswith("Hello"))  # False
+print(text.endswith("!"))  # True
+
+# 文字列の置換
+print(text.replace("World", "Python"))  #   Hello, Python!  
+
+# 文字列のトリミング
+print(text.strip())  # Hello, World!
+print(text.lstrip())  # Hello, World!  
+print(text.rstrip())  #   Hello, World!
+```
+
+### 文字列の分割と結合
+
+文字列は `split()` メソッドを使って分割することができます。また、`join()` メソッドを使って結合することもできます。
+
+```python
+text = "apple,banana,cherry"
+fruits = text.split(",")
+print(fruits)  # ['apple', 'banana', 'cherry']
+
+joined_text = ",".join(fruits)
+print(joined_text)  # apple,banana,cherry
+```
+
+### 文字列のエンコーディングとデコーディング
+
+文字列はエンコードしてバイト列に変換することができます。また、バイト列をデコードして文字列に変換することもできます。
+
+```python
+text = "こんにちは"
+encoded_text = text.encode("utf-8")
+print(encoded_text)  # b'\xe3\x81\x93\xe3\x82\x93\xe3\x81\xab\xe3\x81\xa1\xe3\x81\xaf'
+
+decoded_text = encoded_text.decode("utf-8")
+print(decoded_text)  # こんにちは
+```
+
+### 文字列の正規表現
+
+Pythonの `re` モジュールを使って、正規表現による文字列操作を行うことができます。正規表現は、文字列のパターンマッチングや置換に非常に便利です。
+
+```python
+import re
+
+text = "My phone number is 123-456-7890."
+pattern = r"\d{3}-\d{3}-\d{4}"
+match = re.search(pattern, text)
+
+if match:
+    print("Phone number found:", match.group())  # Phone number found: 123-456-7890
+```
+
+### 文字列のテンプレート
+
+Pythonの `string` モジュールには、テンプレート文字列をサポートする `Template` クラスがあります。テンプレート文字列を使うと、プレースホルダーを使って文字列を動的に生成することができます。
+
+```python
+from string import Template
+
+template = Template("Hello, $name!")
+message = template.substitute(name="Alice")
+print(message)  # Hello, Alice!
+```
+
+### まとめ
+
+Pythonの文字列操作は非常に強力で柔軟です。基本的な操作から高度な操作まで、さまざまな方法を駆使して効率的に文字列を扱うことができます。これらのテクニックを活用して、Pythonプログラミングのスキルを向上させましょう。

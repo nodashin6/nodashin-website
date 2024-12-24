@@ -3,3 +3,152 @@ sidebar_position: 4
 id: assign
 title: 宣言と代入
 ---
+
+## 変数の宣言と代入の基本
+
+Pythonでは、変数の宣言と代入は非常にシンプルです。変数を宣言する際に型を指定する必要はなく、代入する値に基づいて自動的に型が決定されます。
+
+```python
+x = 10
+y = 3.14
+name = "Alice"
+is_active = True
+```
+
+## 多重代入
+
+Pythonでは、一度に複数の変数に値を代入することができます。これを多重代入と呼びます。
+
+```python
+a, b, c = 1, 2, 3
+print(a, b, c)  # 1 2 3
+```
+
+## 変数の交換
+
+Pythonでは、変数の値を簡単に交換することができます。これには一時変数を使用する必要はありません。
+
+```python
+x = 5
+y = 10
+
+x, y = y, x
+print(x, y)  # 10 5
+```
+
+## 変数のスコープ
+
+変数のスコープは、その変数が有効な範囲を指します。Pythonには、ローカルスコープ、エンクロージングスコープ、グローバルスコープ、ビルトインスコープの4つのスコープがあります。
+
+```python
+global_var = "global"
+
+def outer_function():
+    enclosing_var = "enclosing"
+    
+    def inner_function():
+        local_var = "local"
+        print(local_var)  # local
+        print(enclosing_var)  # enclosing
+        print(global_var)  # global
+    
+    inner_function()
+
+outer_function()
+```
+
+## グローバル変数の使用
+
+関数内でグローバル変数を使用する場合、`global` キーワードを使用して明示的に宣言する必要があります。
+
+```python
+counter = 0
+
+def increment():
+    global counter
+    counter += 1
+
+increment()
+print(counter)  # 1
+```
+
+## 非ローカル変数の使用
+
+ネストされた関数内でエンクロージングスコープの変数を使用する場合、`nonlocal` キーワードを使用して明示的に宣言する必要があります。
+
+```python
+def outer_function():
+    count = 0
+    
+    def inner_function():
+        nonlocal count
+        count += 1
+        print(count)
+    
+    inner_function()
+    inner_function()
+
+outer_function()
+# 1
+# 2
+```
+
+## 定数の宣言
+
+Pythonには定数を宣言するためのキーワードはありませんが、慣習としてすべて大文字の変数名を使用して定数を表します。
+
+```python
+PI = 3.14159
+MAX_CONNECTIONS = 100
+```
+
+## 変数の型ヒント
+
+Python 3.5以降では、型ヒントを使用して変数の型を明示することができます。型ヒントはコードの可読性を高め、IDEの補完機能を強化します。
+
+```python
+age: int = 25
+name: str = "Alice"
+height: float = 5.9
+is_student: bool = True
+```
+
+## 変数の初期化
+
+変数を宣言する際には、初期値を設定することが一般的です。初期値を設定しない場合、変数の値は `None` になります。
+
+```python
+x = None
+print(x)  # None
+
+x = 10
+print(x)  # 10
+```
+
+## 変数の削除
+
+変数を削除するには、`del` キーワードを使用します。これにより、変数がメモリから解放されます。
+
+```python
+x = 10
+print(x)  # 10
+
+del x
+# print(x)  # NameError: name 'x' is not defined
+```
+
+## 変数の再代入
+
+Pythonでは、変数に再度値を代入することができます。再代入する際には、変数の型が変わることもあります。
+
+```python
+x = 10
+print(x)  # 10
+
+x = "Hello"
+print(x)  # Hello
+```
+
+## まとめ
+
+Pythonの変数の宣言と代入は非常にシンプルで柔軟です。基本的な操作から高度な操作まで、さまざまな方法を駆使して効率的に変数を扱うことができます。これらのテクニックを活用して、Pythonプログラミングのスキルを向上させましょう。

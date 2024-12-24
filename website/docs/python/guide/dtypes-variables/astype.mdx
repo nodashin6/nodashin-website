@@ -3,3 +3,154 @@ sidebar_position: 5
 id: astype
 title: 型変換
 ---
+
+## 型変換の基本
+
+Pythonでは、データ型を明示的に変換することができます。これを型変換（キャスト）と呼びます。型変換は、データの操作や処理を行う際に非常に重要です。
+
+### 数値型の変換
+
+数値型の変換には、`int()`、`float()`、`complex()` 関数を使用します。
+
+```python
+x = 42.5
+y = "123"
+
+# 浮動小数点数を整数に変換
+int_x = int(x)
+print(int_x)  # 42
+
+# 文字列を整数に変換
+int_y = int(y)
+print(int_y)  # 123
+
+# 整数を浮動小数点数に変換
+float_x = float(int_x)
+print(float_x)  # 42.0
+
+# 整数を複素数に変換
+complex_x = complex(int_x)
+print(complex_x)  # (42+0j)
+```
+
+### 文字列型の変換
+
+文字列型の変換には、`str()` 関数を使用します。数値や他のデータ型を文字列に変換することができます。
+
+```python
+a = 123
+b = 45.67
+c = True
+
+str_a = str(a)
+str_b = str(b)
+str_c = str(c)
+
+print(str_a)  # "123"
+print(str_b)  # "45.67"
+print(str_c)  # "True"
+```
+
+### ブール型の変換
+
+ブール型の変換には、`bool()` 関数を使用します。以下の値は `False` として評価され、それ以外の値は `True` として評価されます。
+
+- `None`
+- `False`
+- `0`（整数および浮動小数点数）
+- `''`（空文字列）
+- `[]`（空リスト）
+- `{}`（空辞書）
+- `()`（空タプル）
+
+```python
+print(bool(0))  # False
+print(bool(""))  # False
+print(bool([]))  # False
+print(bool(1))  # True
+print(bool("Hello"))  # True
+print(bool([1, 2, 3]))  # True
+```
+
+### コレクション型の変換
+
+コレクション型の変換には、`list()`、`tuple()`、`set()` 関数を使用します。これにより、リスト、タプル、セット間の変換が可能です。
+
+```python
+# リストをタプルに変換
+list_a = [1, 2, 3]
+tuple_a = tuple(list_a)
+print(tuple_a)  # (1, 2, 3)
+
+# タプルをリストに変換
+tuple_b = (4, 5, 6)
+list_b = list(tuple_b)
+print(list_b)  # [4, 5, 6]
+
+# リストをセットに変換
+set_a = set(list_a)
+print(set_a)  # {1, 2, 3}
+```
+
+### 辞書型の変換
+
+辞書型の変換には、`dict()` 関数を使用します。リストやタプルを辞書に変換することができます。
+
+```python
+# リストを辞書に変換
+list_c = [("key1", "value1"), ("key2", "value2")]
+dict_c = dict(list_c)
+print(dict_c)  # {'key1': 'value1', 'key2': 'value2'}
+
+# タプルを辞書に変換
+tuple_c = (("key3", "value3"), ("key4", "value4"))
+dict_d = dict(tuple_c)
+print(dict_d)  # {'key3': 'value3', 'key4': 'value4'}
+```
+
+### 型ヒントと型変換
+
+Python 3.5以降では、型ヒントを使用して関数の引数や戻り値の型を明示することができます。型ヒントはコードの可読性を高め、IDEの補完機能を強化します。
+
+```python
+def add(a: int, b: int) -> int:
+    return a + b
+
+print(add(1, 2))  # 3
+```
+
+### 型変換の応用
+
+型変換は、データの前処理や解析において非常に重要です。例えば、CSVファイルから読み込んだデータを適切な型に変換することで、データの操作が容易になります。
+
+```python
+import csv
+
+with open('data.csv', 'r') as file:
+    reader = csv.reader(file)
+    for row in reader:
+        id = int(row[0])
+        name = str(row[1])
+        age = int(row[2])
+        salary = float(row[3])
+        print(f"ID: {id}, Name: {name}, Age: {age}, Salary: {salary}")
+```
+
+### 型変換のエラーハンドリング
+
+型変換を行う際には、変換が失敗する可能性があります。`try`、`except` ブロックを使用してエラーハンドリングを行い、プログラムがクラッシュしないようにすることが重要です。
+
+```python
+def safe_int(value):
+    try:
+        return int(value)
+    except ValueError:
+        return None
+
+print(safe_int("123"))  # 123
+print(safe_int("abc"))  # None
+```
+
+### まとめ
+
+Pythonの型変換は非常に強力で柔軟です。基本的な操作から高度な操作まで、さまざまな方法を駆使して効率的にデータ型を変換することができます。これらのテクニックを活用して、Pythonプログラミングのスキルを向上させましょう。

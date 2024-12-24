@@ -3,3 +3,154 @@ sidebar_position: 3
 id: boolean
 title: ブール値
 ---
+
+## ブール値の基本
+
+Pythonのブール値は、`True` と `False` の2つの値を持ちます。ブール値は、条件式の結果や論理演算の結果として使用されます。
+
+```python
+is_active = True
+is_deleted = False
+```
+
+## ブール値の操作
+
+### 論理演算
+
+Pythonでは、ブール値に対して論理演算を行うことができます。これには、論理積 (`and`)、論理和 (`or`)、論理否定 (`not`) があります。
+
+```python
+a = True
+b = False
+
+print(a and b)  # False
+print(a or b)  # True
+print(not a)  # False
+```
+
+### 比較演算
+
+ブール値は、比較演算の結果として得られます。これには、等しい (`==`)、等しくない (`!=`)、より大きい (`>`)、より小さい (`<`)、以上 (`>=`)、以下 (`<=`) などがあります。
+
+```python
+x = 10
+y = 20
+
+print(x == y)  # False
+print(x != y)  # True
+print(x > y)  # False
+print(x < y)  # True
+print(x >= y)  # False
+print(x <= y)  # True
+```
+
+### ブール値のキャスト
+
+Pythonでは、他のデータ型をブール値にキャストすることができます。`bool()` 関数を使ってキャストします。以下の値は `False` として評価され、それ以外の値は `True` として評価されます。
+
+- `None`
+- `False`
+- `0`（整数および浮動小数点数）
+- `''`（空文字列）
+- `[]`（空リスト）
+- `{}`（空辞書）
+- `()`（空タプル）
+
+```python
+print(bool(None))  # False
+print(bool(0))  # False
+print(bool(''))  # False
+print(bool([]))  # False
+print(bool({}))  # False
+print(bool(()))  # False
+
+print(bool(1))  # True
+print(bool('Hello'))  # True
+print(bool([1, 2, 3]))  # True
+print(bool({'key': 'value'}))  # True
+print(bool((1, 2, 3)))  # True
+```
+
+### 条件式
+
+ブール値は、条件式の結果として使用されます。条件式は、`if` 文や `while` 文などの制御構文で使用されます。
+
+```python
+x = 10
+
+if x > 5:
+    print("x is greater than 5")
+else:
+    print("x is not greater than 5")
+
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+### 三項演算子
+
+Pythonでは、三項演算子を使って条件式を1行で記述することができます。三項演算子は、`<条件式> if <真の場合の値> else <偽の場合の値>` の形式で記述します。
+
+```python
+x = 10
+y = 20
+
+max_value = x if x > y else y
+print(max_value)  # 20
+```
+
+### ブール値の演算子の優先順位
+
+Pythonの論理演算子には優先順位があります。`not` が最も高く、次に `and`、最後に `or` です。必要に応じて括弧を使って優先順位を明示することができます。
+
+```python
+a = True
+b = False
+c = True
+
+result = a or b and c
+print(result)  # True
+
+result = (a or b) and c
+print(result)  # True
+```
+
+### ブール値の短絡評価
+
+Pythonの論理演算子は短絡評価を行います。これは、左辺の値だけで結果が決まる場合、右辺の評価を行わないことを意味します。
+
+```python
+def func():
+    print("Function called")
+    return True
+
+result = True or func()
+print(result)  # True
+# "Function called" は表示されません
+
+result = False and func()
+print(result)  # False
+# "Function called" は表示されません
+```
+
+### ブール値の応用
+
+ブール値は、リスト内包表記やジェネレータ式などでも使用されます。これにより、条件に基づいてリストやジェネレータを作成することができます。
+
+```python
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# 偶数のみを含むリストを作成
+even_numbers = [x for x in numbers if x % 2 == 0]
+print(even_numbers)  # [2, 4, 6, 8, 10]
+
+# 奇数のみを含むジェネレータを作成
+odd_numbers = (x for x in numbers if x % 2 != 0)
+print(list(odd_numbers))  # [1, 3, 5, 7, 9]
+```
+
+### まとめ
+
+Pythonのブール値は、条件式や論理演算の結果として非常に重要な役割を果たします。基本的な操作から高度な操作まで、さまざまな方法を駆使して効率的にブール値を扱うことができます。これらのテクニックを活用して、Pythonプログラミングのスキルを向上させましょう。
