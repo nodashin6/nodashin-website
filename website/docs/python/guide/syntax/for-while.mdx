@@ -1,0 +1,93 @@
+---
+title: 繰り返し処理 (for, while)
+---
+
+# 繰り返し処理 (for, while)
+
+Pythonの繰り返し処理は、特定のコードブロックを複数回実行するために使用されます。`for`文と`while`文を使用して、異なる条件でループを制御することができます。ここでは、繰り返し処理の基本から応用までを詳しく説明します。
+
+## 基本的なfor文
+
+`for`文は、シーケンス（リスト、タプル、文字列など）の各要素に対してコードブロックを実行します。
+```python
+fruits = ["apple", "banana", "cherry"]
+for fruit in fruits:
+    print(fruit)
+```
+
+## range関数
+
+`range`関数を使用して、指定した回数だけループを実行することができます。
+```python
+for i in range(5):
+    print(i)  # 結果: 0, 1, 2, 3, 4
+```
+
+## while文
+
+`while`文は、条件がTrueの間、コードブロックを繰り返し実行します。
+```python
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+```
+
+## ネストされたループ
+
+ループはネストすることができます。これにより、複雑な繰り返し処理を行うことができます。
+```python
+for i in range(3):
+    for j in range(2):
+        print(f"i={i}, j={j}")
+```
+
+## ループの制御
+
+`break`文や`continue`文を使用して、ループの実行を制御することができます。
+```python
+for i in range(5):
+    if i == 3:
+        break
+    print(i)  # 結果: 0, 1, 2
+
+for i in range(5):
+    if i == 3:
+        continue
+    print(i)  # 結果: 0, 1, 2, 4
+```
+
+## ループとelse
+
+`for`文や`while`文には、`else`ブロックを追加することができます。ループが正常に終了した場合に`else`ブロックが実行されます。
+```python
+for i in range(5):
+    print(i)
+else:
+    print("ループが正常に終了しました")
+```
+
+## リスト内包表記
+
+リスト内包表記を使用すると、ループを簡潔に記述できます。
+```python
+squares = [x**2 for x in range(10)]
+print(squares)  # 結果: [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+```
+
+## ジェネレータ内包表記
+
+ジェネレータ内包表記を使用すると、メモリ効率の良いループを作成できます。
+```python
+squares = (x**2 for x in range(10))
+for square in squares:
+    print(square)
+```
+
+## 繰り返し処理のベストプラクティス
+
+- ループの条件を明確にし、無限ループを避ける。
+- ネストが深くなる場合は、関数に分割して可読性を高める。
+- 内包表記を適切に使用して、コードを簡潔に保つ。
+
+繰り返し処理はプログラムの基本的な構造であり、適切に使用することでコードの効率性と可読性を向上させることができます。上級Pythonエンジニアとして、繰り返し処理を効果的に活用することが重要です。

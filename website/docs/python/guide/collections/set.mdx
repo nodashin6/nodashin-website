@@ -1,0 +1,80 @@
+---
+title: セット
+---
+
+# セット
+
+Pythonのセットは、重複しない要素のコレクションを格納するためのデータ型です。セットはミュータブル（変更可能）であり、異なるデータ型の要素を含むことができます。セットの基本的な操作について説明します。
+
+## セットの作成
+
+セットは波括弧 `{}` を使用して作成します。要素はカンマ `,` で区切ります。
+```python
+fruits = {"apple", "banana", "cherry"}
+```
+
+## セットのアクセス
+
+セットは順序を持たないため、インデックスを使用して要素にアクセスすることはできません。しかし、ループを使用して要素を取得することができます。
+```python
+for fruit in fruits:
+    print(fruit)
+```
+
+## セットの追加
+
+セットに要素を追加するには、`add()` メソッドを使用します。
+```python
+fruits.add("orange")
+print(fruits)  # 結果: {"apple", "banana", "cherry", "orange"}
+```
+
+## セットの削除
+
+セットから要素を削除するには、`remove()` メソッドを使用します。
+```python
+fruits.remove("banana")
+print(fruits)  # 結果: {"apple", "cherry", "orange"}
+```
+
+## セットの操作
+
+セットには集合論に基づく多くの操作があります。以下にいくつかの例を示します。
+
+- `union()`: 2つのセットの和集合を返します。
+  ```python
+  set1 = {"apple", "banana"}
+  set2 = {"cherry", "orange"}
+  result = set1.union(set2)
+  print(result)  # 結果: {"apple", "banana", "cherry", "orange"}
+  ```
+
+- `intersection()`: 2つのセットの積集合を返します。
+  ```python
+  set1 = {"apple", "banana", "cherry"}
+  set2 = {"cherry", "orange"}
+  result = set1.intersection(set2)
+  print(result)  # 結果: {"cherry"}
+  ```
+
+- `difference()`: 2つのセットの差集合を返します。
+  ```python
+  set1 = {"apple", "banana", "cherry"}
+  set2 = {"cherry", "orange"}
+  result = set1.difference(set2)
+  print(result)  # 結果: {"apple", "banana"}
+  ```
+
+- `symmetric_difference()`: 2つのセットの対称差集合を返します。
+  ```python
+  set1 = {"apple", "banana", "cherry"}
+  set2 = {"cherry", "orange"}
+  result = set1.symmetric_difference(set2)
+  print(result)  # 結果: {"apple", "banana", "orange"}
+  ```
+
+## セットの用途
+
+セットは重複しない要素を格納するため、重複を排除したい場合に非常に便利です。また、集合論に基づく操作を効率的に行うことができます。
+
+セットはPythonで非常に強力かつ柔軟なデータ型であり、多くの場面で役立ちます。セットの操作をマスターすることで、効率的なプログラムを書くことができます。

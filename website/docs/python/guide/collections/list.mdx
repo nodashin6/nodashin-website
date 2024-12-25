@@ -1,0 +1,85 @@
+---
+title: リスト
+---
+
+# リスト
+
+Pythonのリストは、複数の要素を一つの変数に格納するためのデータ型です。リストはミュータブル（変更可能）であり、異なるデータ型の要素を含むことができます。リストの基本的な操作について説明します。
+
+## リストの作成
+
+リストは角括弧 `[]` を使用して作成します。要素はカンマ `,` で区切ります。
+```python
+fruits = ["apple", "banana", "cherry"]
+```
+
+## リストのアクセス
+
+リストの要素にはインデックスを使用してアクセスします。インデックスは0から始まります。
+```python
+print(fruits[0])  # 結果: apple
+```
+
+## リストの変更
+
+リストの要素はインデックスを使用して変更できます。
+```python
+fruits[1] = "blueberry"
+print(fruits)  # 結果: ["apple", "blueberry", "cherry"]
+```
+
+## リストの追加
+
+リストに要素を追加するには、`append()` メソッドを使用します。
+```python
+fruits.append("orange")
+print(fruits)  # 結果: ["apple", "blueberry", "cherry", "orange"]
+```
+
+## リストの削除
+
+リストから要素を削除するには、`remove()` メソッドを使用します。
+```python
+fruits.remove("blueberry")
+print(fruits)  # 結果: ["apple", "cherry", "orange"]
+```
+
+## リストのスライス
+
+リストの一部を取得するには、スライスを使用します。
+```python
+print(fruits[1:3])  # 結果: ["cherry", "orange"]
+```
+
+## リストの内包表記
+
+リスト内包表記を使用すると、リストを簡潔に作成できます。
+```python
+squares = [x**2 for x in range(10)]
+print(squares)  # 結果: [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+```
+
+## リストのメソッド
+
+リストには多くの便利なメソッドがあります。以下にいくつかの例を示します。
+
+- `extend()`: 他のリストの要素を追加します。
+  ```python
+  fruits.extend(["grape", "melon"])
+  print(fruits)  # 結果: ["apple", "cherry", "orange", "grape", "melon"]
+  ```
+
+- `insert()`: 指定した位置に要素を挿入します。
+  ```python
+  fruits.insert(1, "kiwi")
+  print(fruits)  # 結果: ["apple", "kiwi", "cherry", "orange", "grape", "melon"]
+  ```
+
+- `pop()`: 指定した位置の要素を削除し、その要素を返します。
+  ```python
+  fruit = fruits.pop(2)
+  print(fruit)  # 結果: cherry
+  print(fruits)  # 結果: ["apple", "kiwi", "orange", "grape", "melon"]
+  ```
+
+リストはPythonで非常に強力かつ柔軟なデータ型であり、多くの場面で役立ちます。リストの操作をマスターすることで、効率的なプログラムを書くことができます。

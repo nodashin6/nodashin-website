@@ -1,0 +1,73 @@
+---
+title: 辞書
+---
+
+# 辞書
+
+Pythonの辞書は、キーと値のペアを格納するためのデータ型です。辞書はミュータブル（変更可能）であり、キーはユニークでなければなりません。辞書の基本的な操作について説明します。
+
+## 辞書の作成
+
+辞書は波括弧 `{}` を使用して作成します。キーと値のペアはコロン `:` で区切り、ペア同士はカンマ `,` で区切ります。
+```python
+person = {"name": "John", "age": 30, "city": "New York"}
+```
+
+## 辞書のアクセス
+
+辞書の値にはキーを使用してアクセスします。
+```python
+print(person["name"])  # 結果: John
+```
+
+## 辞書の変更
+
+辞書の値はキーを使用して変更できます。
+```python
+person["age"] = 31
+print(person)  # 結果: {"name": "John", "age": 31, "city": "New York"}
+```
+
+## 辞書の追加
+
+辞書に新しいキーと値のペアを追加するには、キーを指定して値を代入します。
+```python
+person["email"] = "john@example.com"
+print(person)  # 結果: {"name": "John", "age": 31, "city": "New York", "email": "john@example.com"}
+```
+
+## 辞書の削除
+
+辞書からキーと値のペアを削除するには、`del` キーワードを使用します。
+```python
+del person["city"]
+print(person)  # 結果: {"name": "John", "age": 31", "email": "john@example.com"}
+```
+
+## 辞書のメソッド
+
+辞書には多くの便利なメソッドがあります。以下にいくつかの例を示します。
+
+- `keys()`: 辞書のすべてのキーを返します。
+  ```python
+  keys = person.keys()
+  print(keys)  # 結果: dict_keys(["name", "age", "email"])
+  ```
+
+- `values()`: 辞書のすべての値を返します。
+  ```python
+  values = person.values()
+  print(values)  # 結果: dict_values(["John", 31, "john@example.com"])
+  ```
+
+- `items()`: 辞書のすべてのキーと値のペアを返します。
+  ```python
+  items = person.items()
+  print(items)  # 結果: dict_items([("name", "John"), ("age", 31), ("email", "john@example.com")])
+  ```
+
+## 辞書の用途
+
+辞書はキーと値のペアを効率的に格納および操作するため、データベースや設定ファイルの管理などに非常に便利です。また、辞書は高速なキー検索を提供します。
+
+辞書はPythonで非常に強力かつ柔軟なデータ型であり、多くの場面で役立ちます。辞書の操作をマスターすることで、効率的なプログラムを書くことができます。

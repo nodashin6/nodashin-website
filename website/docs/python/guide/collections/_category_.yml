@@ -1,0 +1,11 @@
+position: 4
+label: '04-コレクション型'
+collapsible: true
+collapsed: false
+className: red
+link:
+  type: generated-index
+  title: '04-コレクション型'
+  slug: collections
+customProps:
+  description: 'Pythonのコレクション型について学ぶ'

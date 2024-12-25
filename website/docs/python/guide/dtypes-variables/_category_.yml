@@ -5,7 +5,7 @@ collapsed: false
 className: red
 link:
   type: generated-index
-  title: '01-導入'
+  title: '02-データ型と変数'
   slug: dtypes-variables
 customProps:
   description: 'データ型と変数について学ぶ'

@@ -1,0 +1,11 @@
+position: 5
+label: '05-制御構文'
+collapsible: true
+collapsed: false
+className: red
+link:
+  type: generated-index
+  title: '05-制御構文'
+  slug: syntax
+customProps:
+  description: 'Pythonの制御構文について学ぶ'
