@@ -1,0 +1,11 @@
+position: 1
+label: '01-導入'
+collapsible: true
+collapsed: false
+className: red
+link:
+  type: generated-index
+  title: '01-導入'
+  slug: intro
+customProps:
+  description: 'Pythonの始めの一歩'

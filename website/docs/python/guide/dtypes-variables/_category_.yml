@@ -1,0 +1,11 @@
+position: 2
+label: '02-データ型と変数'
+collapsible: true
+collapsed: false
+className: red
+link:
+  type: generated-index
+  title: '01-導入'
+  slug: dtypes-variables
+customProps:
+  description: 'データ型と変数について学ぶ'

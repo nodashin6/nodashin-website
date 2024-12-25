@@ -1,0 +1,11 @@
+position: 3
+label: '03-演算子と式'
+collapsible: true
+collapsed: false
+className: red
+link:
+  type: generated-index
+  title: '03-演算子と式'
+  slug: operator
+customProps:
+  description: 'Pythonの演算子と式について学ぶ'
