@@ -1,0 +1,75 @@
+---
+title: "独自モジュールの作成"
+id: custom-modules
+---
+
+# 独自モジュールの作成
+
+Pythonでは、独自のモジュールを作成してコードを整理し、再利用性を高めることができます。ここでは、独自モジュールの作成方法とその活用について説明します。
+
+## モジュールの作成
+
+モジュールは、Pythonファイル（`.py`）として作成されます。以下は、`mymodule.py`という名前のモジュールの例です。
+```python
+# mymodule.py
+
+def greet(name):
+    return f"こんにちは、{name}さん！"
+
+def add(a, b):
+    return a + b
+```
+
+## モジュールのインポート
+
+作成したモジュールを他のファイルで使用するには、`import`文を使用します。
+```python
+# main.py
+import mymodule
+
+# mymoduleの関数を使用
+message = mymodule.greet("太郎")
+print(message)  # 結果: こんにちは、太郎さん！
+
+result = mymodule.add(3, 5)
+print(result)  # 結果: 8
+```
+
+## モジュールの再読み込み
+
+モジュールを再読み込みするには、`importlib`モジュールの`reload`関数を使用します。
+```python
+import importlib
+import mymodule
+
+# モジュールの再読み込み
+importlib.reload(mymodule)
+```
+
+## モジュールのドキュメンテーション
+
+モジュールにはドキュメンテーション文字列（docstring）を追加して、関数やクラスの説明を記述することができます。
+```python
+# mymodule.py
+
+def greet(name):
+    """指定された名前の人に挨拶をします。"""
+    return f"こんにちは、{name}さん！"
+```
+
+## モジュールのテスト
+
+モジュールのテストを行うために、`if __name__ == "__main__":`ブロックを使用して、モジュールが直接実行された場合にのみテストコードを実行することができます。
+```python
+# mymodule.py
+
+def greet(name):
+    return f"こんにちは、{name}さん！"
+
+if __name__ == "__main__":
+    # テストコード
+    print(greet("テスト"))
+```
+
+独自モジュールを作成することで、コードの整理と再利用が容易になります。モジュールの作成方法を理解し、効果的に活用しましょう。
+

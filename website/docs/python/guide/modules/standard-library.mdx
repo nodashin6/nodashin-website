@@ -1,0 +1,69 @@
+---
+title: "標準ライブラリの使い方"
+id: standard-library
+---
+
+# 標準ライブラリの使い方
+
+Pythonの標準ライブラリは、豊富なモジュールとパッケージを提供しており、さまざまなタスクを効率的に実行するためのツールを提供します。ここでは、いくつかの主要な標準ライブラリの使い方を紹介します。
+
+## osモジュール
+
+`os`モジュールは、オペレーティングシステムとのインターフェースを提供します。ファイルやディレクトリの操作に便利です。
+```python
+import os
+
+# カレントディレクトリの取得
+current_dir = os.getcwd()
+print(current_dir)
+
+# 新しいディレクトリの作成
+os.mkdir("new_directory")
+```
+
+## sysモジュール
+
+`sys`モジュールは、Pythonインタプリタとの対話を提供します。コマンドライン引数の取得や標準入出力の操作に使用されます。
+```python
+import sys
+
+# コマンドライン引数の取得
+args = sys.argv
+print(args)
+
+# プログラムの終了
+sys.exit(0)
+```
+
+## datetimeモジュール
+
+`datetime`モジュールは、日付と時刻の操作を提供します。日時の計算やフォーマットに便利です。
+```python
+from datetime import datetime
+
+# 現在の日付と時刻の取得
+now = datetime.now()
+print(now)
+
+# 日付のフォーマット
+formatted_date = now.strftime("%Y-%m-%d %H:%M:%S")
+print(formatted_date)
+```
+
+## jsonモジュール
+
+`json`モジュールは、JSONデータの操作を提供します。データのシリアライズとデシリアライズに使用されます。
+```python
+import json
+
+# PythonオブジェクトをJSON文字列に変換
+data = {"name": "John", "age": 30}
+json_str = json.dumps(data)
+print(json_str)
+
+# JSON文字列をPythonオブジェクトに変換
+parsed_data = json.loads(json_str)
+print(parsed_data)
+```
+
+標準ライブラリを活用することで、外部ライブラリをインストールせずに多くのタスクを効率的に実行できます。Pythonの標準ライブラリをマスターすることで、より強力なプログラムを作成できるようになります。

@@ -33,7 +33,7 @@ sidebar_position: 99
 5. 制御構文
    - 条件分岐 (if, elif, else)
    - 繰り返し処理 (for, while)
-   - break, continue, pass
+   - フローの制御（break, continue, pass）
 6. 関数
    - 関数の定義と呼び出し
    - 引数と戻り値

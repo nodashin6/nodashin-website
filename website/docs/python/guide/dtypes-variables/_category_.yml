@@ -1,7 +1,7 @@
 position: 2
 label: '02-データ型と変数'
 collapsible: true
-collapsed: false
+collapsed: true
 className: red
 link:
   type: generated-index

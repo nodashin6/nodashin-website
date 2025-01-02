@@ -1,0 +1,11 @@
+position: 6
+label: '06-関数'
+collapsible: true
+collapsed: true
+className: red
+link:
+  type: generated-index
+  title: '06-関数'
+  slug: functions
+customProps:
+  description: 'Pythonの関数について学ぶ'

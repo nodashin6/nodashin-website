@@ -1,0 +1,61 @@
+---
+title: "モジュールのインポート"
+id: import-module
+---
+
+# モジュールのインポート
+
+Pythonでは、`import`文を使用してモジュールをインポートし、他のファイルやライブラリの機能を利用することができます。ここでは、モジュールのインポート方法とその応用について説明します。
+
+## 基本的なインポート
+
+モジュール全体をインポートするには、`import`文を使用します。
+```python
+import math
+
+# mathモジュールの関数を使用
+result = math.sqrt(16)
+print(result)  # 結果: 4.0
+```
+
+## 特定の関数やクラスのインポート
+
+モジュール内の特定の関数やクラスをインポートするには、`from ... import ...`構文を使用します。
+```python
+from math import sqrt
+
+# sqrt関数を直接使用
+result = sqrt(16)
+print(result)  # 結果: 4.0
+```
+
+## 別名の使用
+
+インポートしたモジュールや関数に別名を付けることができます。これにより、コードの可読性を向上させたり、名前の衝突を避けたりすることができます。
+```python
+import numpy as np
+
+# npという別名でnumpyモジュールを使用
+array = np.array([1, 2, 3])
+print(array)
+```
+
+## パッケージのインポート
+
+パッケージは、複数のモジュールをまとめたものです。パッケージ内のモジュールをインポートするには、ドット `.` を使用します。
+```python
+from mypackage import mymodule
+
+# mymoduleの関数を使用
+mymodule.my_function()
+```
+
+## 相対インポート
+
+同じパッケージ内のモジュールをインポートする場合、相対インポートを使用できます。
+```python
+from . import mymodule
+from .subpackage import anothermodule
+```
+
+モジュールのインポートを適切に使用することで、コードの再利用性と可読性を向上させることができます。Pythonのモジュールシステムを理解し、効果的に活用しましょう。

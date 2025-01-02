@@ -1,7 +1,7 @@
 position: 5
 label: '05-制御構文'
 collapsible: true
-collapsed: false
+collapsed: true
 className: red
 link:
   type: generated-index

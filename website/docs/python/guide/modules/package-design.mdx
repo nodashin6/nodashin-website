@@ -1,0 +1,78 @@
+---
+title: "パッケージ構造"
+id: package-design
+---
+
+# パッケージ構造
+
+Pythonのパッケージは、複数のモジュールをまとめたディレクトリ構造です。パッケージを使用することで、コードの整理と再利用が容易になります。ここでは、パッケージの基本的な構造と作成方法について説明します。
+
+## パッケージの基本構造
+
+パッケージは、ディレクトリとして作成され、その中に複数のモジュールが含まれます。パッケージディレクトリには、`__init__.py`ファイルが必要です。このファイルは空でも構いませんが、パッケージの初期化コードを含めることもできます。
+
+```
+mypackage/
+    __init__.py
+    module1.py
+    module2.py
+```
+
+## パッケージの作成
+
+以下は、`mypackage`という名前のパッケージの例です。
+
+### `__init__.py`ファイル
+
+`__init__.py`ファイルは、パッケージの初期化コードを含むことができます。
+```python
+# mypackage/__init__.py
+
+from .module1 import greet
+from .module2 import add
+```
+
+### モジュールファイル
+
+パッケージ内のモジュールファイルには、通常のPythonコードを記述します。
+```python
+# mypackage/module1.py
+
+def greet(name):
+    return f"こんにちは、{name}さん！"
+```
+
+```python
+# mypackage/module2.py
+
+def add(a, b):
+    return a + b
+```
+
+## パッケージのインポート
+
+パッケージをインポートするには、`import`文を使用します。
+```python
+# main.py
+import mypackage
+
+# パッケージ内の関数を使用
+message = mypackage.greet("太郎")
+print(message)  # 結果: こんにちは、太郎さん！
+
+result = mypackage.add(3, 5)
+print(result)  # 結果: 8
+```
+
+## サブパッケージ
+
+パッケージ内にさらにサブパッケージを作成することもできます。サブパッケージも同様に`__init__.py`ファイルを含む必要があります。
+```
+mypackage/
+    __init__.py
+    subpackage/
+        __init__.py
+        module3.py
+```
+
+パッケージを使用することで、コードの整理と再利用が容易になります。パッケージの基本構造を理解し、効果的に活用しましょう。

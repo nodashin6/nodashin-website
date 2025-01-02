@@ -1,0 +1,74 @@
+---
+title: "再帰関数"
+id: recursion
+---
+
+# 再帰関数
+
+再帰関数は、自分自身を呼び出す関数です。再帰関数を使用することで、特定の問題を簡潔に解決することができます。ここでは、再帰関数の基本から応用までを詳しく説明します。
+
+## 基本的な再帰関数
+
+再帰関数は、ベースケース（終了条件）と再帰ステップ（自己呼び出し）を持ちます。以下は、階乗を計算する再帰関数の例です。
+```python
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+result = factorial(5)
+print(result)  # 結果: 120
+```
+
+## 再帰関数の利点
+
+再帰関数は、特定の問題を簡潔に表現するのに適しています。例えば、フィボナッチ数列の計算などです。
+```python
+def fibonacci(n):
+    if n <= 1:
+        return n
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)
+
+result = fibonacci(6)
+print(result)  # 結果: 8
+```
+
+## 再帰関数の欠点
+
+再帰関数は、呼び出しごとにスタックフレームを消費するため、深い再帰はスタックオーバーフローを引き起こす可能性があります。また、計算量が多い場合は非効率になることがあります。
+
+## 尾再帰最適化
+
+Pythonは尾再帰最適化をサポートしていませんが、尾再帰を使用することで再帰の深さを制限することができます。以下は、尾再帰を使用した階乗計算の例です。
+```python
+def factorial_tail(n, acc=1):
+    if n == 0:
+        return acc
+    else:
+        return factorial_tail(n - 1, n * acc)
+
+result = factorial_tail(5)
+print(result)  # 結果: 120
+```
+
+## メモ化
+
+メモ化を使用することで、再帰関数の計算効率を向上させることができます。以下は、メモ化を使用したフィボナッチ数列の計算例です。
+```python
+memo = {}
+
+def fibonacci_memo(n):
+    if n in memo:
+        return memo[n]
+    if n <= 1:
+        return n
+    memo[n] = fibonacci_memo(n - 1) + fibonacci_memo(n - 2)
+    return memo[n]
+
+result = fibonacci_memo(6)
+print(result)  # 結果: 8
+```
+
+再帰関数を適切に使用することで、特定の問題を簡潔に解決することができます。再帰関数の利点と欠点を理解し、効果的に活用しましょう。

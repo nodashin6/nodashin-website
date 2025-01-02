@@ -1,0 +1,11 @@
+position: 7
+label: '07-モジュールとパッケージ'
+collapsible: true
+collapsed: true
+className: red
+link:
+  type: generated-index
+  title: '07-モジュールとパッケージ'
+  slug: modules
+customProps:
+  description: 'Pythonのモジュールとパッケージについて学ぶ'

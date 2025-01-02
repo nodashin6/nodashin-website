@@ -1,0 +1,84 @@
+---
+title: "引数と戻り値"
+id: argments-return
+---
+
+# 引数と戻り値
+
+関数は引数を受け取り、処理結果を戻り値として返すことができます。引数と戻り値を適切に使用することで、関数の柔軟性と再利用性を高めることができます。
+
+## 引数の種類
+
+関数は位置引数とキーワード引数を受け取ることができます。
+
+### 位置引数
+
+位置引数は、関数呼び出し時に指定した順序で渡されます。
+```python
+def add(a, b):
+    return a + b
+
+result = add(3, 5)
+print(result)  # 結果: 8
+```
+
+### キーワード引数
+
+キーワード引数は、関数呼び出し時に引数名を指定して渡されます。
+```python
+def greet(name, message):
+    print(f"{message}, {name}さん！")
+
+greet(name="太郎", message="こんにちは")  # 結果: こんにちは, 太郎さん！
+```
+
+## デフォルト引数
+
+デフォルト引数を使用すると、関数呼び出し時に引数を省略できます。
+```python
+def greet(name, message="こんにちは"):
+    print(f"{message}, {name}さん！")
+
+greet("太郎")  # 結果: こんにちは, 太郎さん！
+```
+
+## 可変長引数
+
+可変長引数を使用すると、任意の数の引数を受け取ることができます。
+
+### 可変長位置引数
+
+可変長位置引数は、`*args`を使用して定義します。
+```python
+def add(*args):
+    return sum(args)
+
+result = add(1, 2, 3, 4)
+print(result)  # 結果: 10
+```
+
+### 可変長キーワード引数
+
+可変長キーワード引数は、`**kwargs`を使用して定義します。
+```python
+def greet(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+greet(name="太郎", message="こんにちは")  # 結果: name: 太郎, message: こんにちは
+```
+
+## 戻り値
+
+関数は`return`文を使用して値を返します。複数の値を返す場合は、タプルを使用します。
+```python
+def divide(a, b):
+    quotient = a // b
+    remainder = a % b
+    return quotient, remainder
+
+q, r = divide(10, 3)
+print(q, r)  # 結果: 3 1
+```
+
+引数と戻り値を適切に使用することで、関数の柔軟性と再利用性を高めることができます。これにより、より効率的なプログラムを書くことができます。
