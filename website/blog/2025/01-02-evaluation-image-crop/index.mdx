@@ -1,0 +1,113 @@
+---
+title: 人類の進化のProgressBar
+slug: evaluation-image-crop
+authors: [nodashin]
+tags: [web, react, css]
+---
+
+import React, { useState } from 'react';
+import DocusaurusImageUrl from './evaluations.png';
+
+export const ImageCrop = () => {
+    const maxWidth = 960;
+    const [progress, setProgress] = useState(0);
+    const [intervalId, setIntervalId] = useState(null);
+
+    const handlePlay = () => {
+        if (intervalId) return; // Prevent multiple intervals
+        const id = setInterval(() => {
+            setProgress(prev => {
+                if (prev >= 100) {
+                    clearInterval(id);
+                    setIntervalId(null);
+                    return 100;
+                }
+                return prev + 1;
+            });
+        }, 100);
+        setIntervalId(id);
+    };
+
+    const handleReset = () => {
+        setProgress(0);
+    }
+
+    const cropStyle = {
+        objectFit: 'contain',
+        objectPosition: '0px 0px',
+        width: '100%',
+        height: 'auto',
+        opacity: 0.65, // 透明度を設定します。
+    };
+
+    const pbarBgColor = 'var(--ifm-background-color)';
+    const pbarTextColor = 'var(--ifm-color-content)';
+    const pbarTextShadowColor = pbarBgColor;
+
+    const overlayStyle = {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        width: '100%',
+        backgroundColor: pbarBgColor,
+        opacity: 1,
+        transition: 'width 0.1s linear',
+        clipPath: `inset(0 0 0 ${progress}%)`, // Use clip-path to make the right side transparent
+    };
+
+    const overlayLoadingTextStyle = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: 'none',
+        opacity: 0.8,
+        fontSize: 36,
+        fontWeight: 'bold',
+        color: `${pbarTextColor}`,
+        textShadow: `0px 0px 8px ${pbarTextShadowColor}`,
+    };
+
+    return (
+        <div>
+            <button onClick={handlePlay}>Play</button>
+            <button onClick={handleReset}>Reset</button>
+            <div 
+                style={{ 
+                    position: 'relative', 
+                    width: '100%', 
+                    height: '100%', 
+                    overflow: 'hidden',
+                    backgroundColor: `${pbarBgColor}`,
+                    borderRadius: 8
+                }}
+            >
+                <img
+                    src={DocusaurusImageUrl}
+                    style={cropStyle}
+                    alt="Cropped"
+                />
+                <div style={overlayStyle}></div>
+                <div style={overlayLoadingTextStyle}>{progress}%</div>
+            </div>            
+        </div>
+    );
+}
+
+<br />
+
+<ImageCrop />
+
+<!-- truncate -->
+
+
+## 詳細
+画像は生成AIで作成後、加工したもの。  
+詳しくはgithubでソースコード見てください。
+
+
+## メモ
+
+ドキュザウルスのbgColorのCSS変数  
+`var(--ifm-background-color)`

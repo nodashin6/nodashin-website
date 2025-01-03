@@ -22,7 +22,7 @@ const FeatureList = [
     ),
   },
   {
-    title: 'Humberger is delicious',
+    title: 'Hamburger is delicious',
     Svg: require('@site/static/img/f_f_health_37_svg_f_health_37_1nbg.svg').default,
     description: (
       <>

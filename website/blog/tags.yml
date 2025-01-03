@@ -2,3 +2,19 @@ python:
   label: Python
   permalink: /python
   description: Python tag description
+
+react:
+  label: React
+  permalink: /react
+  description: React tag description
+
+css:
+  label: CSS
+  permalink: /css
+  description: CSS tag description
+
+web:
+  label: Web
+  permalink: /web
+  description: Web tag description
+
