@@ -1,0 +1,132 @@
+---
+title: adapterなどの命名規則
+slug: naming-rule-for-adapter
+authors: [nodashin]
+tags: [python]
+---
+
+入力を受け取り、特定の出力を返す関数の命名としての、
+adapter, converter, transformer, processor, mapper, filter, encoder/decoder, serializer/deserializer, Formatter
+の使い分け
+
+<!-- truncate -->
+
+## 概要
+
+入力を受け取り、何らかの処理をして出力を生成するという概念を表す英単語には、以下のようなものがあります。
+
+## 代表的な単語とその意味
+
+### Adapter
+**意味:** 互換性のない2つのインターフェースをつなぐためのもの。  
+**プログラミングでの使用例:** クラスやインターフェースの間に挟んで、形式や構造を変換する。  
+**例:** USB-to-HDMI Adapter、JavaのAdapter Pattern
+
+### Converter
+**意味:** ある形式から別の形式に変換する。  
+**プログラミングでの使用例:** ファイル形式やデータ型を変換する。  
+**例:** JSONをXMLに変換するコンバータ
+
+### Transformer
+**意味:** データを大きく変形・加工するもの。  
+**プログラミングでの使用例:** データに意味的な変更を加える場合や、機械学習モデルでの前処理。  
+**例:** テキストデータの正規化や特徴量のスケーリング
+
+### Processor
+**意味:** 入力データを処理する。  
+**プログラミングでの使用例:** 一連の処理を加える機能を持つ場合。  
+**例:** 音声処理、画像処理
+
+### Mapper
+**意味:** 入力を別の形式にマッピングする。  
+**プログラミングでの使用例:** データベースやデータ転送の際、対応付けを行う。  
+**例:** エンティティとDTOのマッピング
+
+### Filter
+**意味:** 入力データを条件に基づいて選別する。  
+**プログラミングでの使用例:** 特定の条件を満たすデータだけを通過させる。  
+**例:** ストリーム処理でのフィルタリング
+
+### Encoder / Decoder
+**意味:** データをエンコード（符号化）したり、デコード（復号化）する。  
+**プログラミングでの使用例:** バイナリデータを文字列に変換するなど。  
+**例:** Base64エンコーダ/デコーダ
+
+### Serializer / Deserializer
+**意味:** データをシリアライズ（直列化）やデシリアライズ（逆直列化）する。  
+**プログラミングでの使用例:** データ構造を文字列やバイナリ形式に変換して保存や送信。  
+**例:** JSONシリアライザ
+
+### Formatter
+**意味:** データを特定の形式に整形する。  
+**プログラミングでの使用例:** 日付や文字列をフォーマットする。  
+**例:** YYYY-MM-DD形式の文字列生成
+
+## プログラミングにおける使い分け
+
+使い分けのポイントは、その役割や処理の性質です。
+
+### Adapter
+**用途:** インターフェースの不整合を解消する。  
+異なるクラスやライブラリを統一的に利用したい場合。
+
+### Converter
+**用途:** 形式を変えるだけで、意味的な変更を伴わない場合。  
+ファイル形式やデータ型の単純変換。
+
+### Transformer
+**用途:** データに意味的な変更を加える場合。  
+構造や意味を大きく変える処理。
+
+### Processor
+**用途:** 複数の処理を一括して実行する場合。  
+入力データに対して一連の計算や操作を行うとき。
+
+### Mapper
+**用途:** キーと値の対応付けを行う場合。  
+抽象的な対応付けがメインで、処理内容は軽微。
+
+### Encoder / Decoder
+**用途:** 符号化・復号化が必要な場合。  
+通信やデータストレージの際のエンコード処理。
+
+### Serializer / Deserializer
+**用途:** シリアライズ・デシリアライズが必要な場合。  
+データを保存や通信に適した形式に変換する。
+
+### Formatter
+**用途:** 表示や出力時に特定の形式で整える場合。  
+出力の見栄えを整えたいとき。
+
+## 実例
+
+### Adapter
+```python
+class LegacyPrinter:
+    def print(self, message):
+        print(f"Legacy: {message}")
+
+class ModernPrinter:
+    def display(self, message):
+        print(f"Modern: {message}")
+
+class PrinterAdapter:
+    def __init__(self, modern_printer):
+        self.modern_printer = modern_printer
+
+    def print(self, message):
+        self.modern_printer.display(message)
+
+modern = ModernPrinter()
+adapter = PrinterAdapter(modern)
+adapter.print("Hello, World!")
+```
+
+### Converter
+```python
+def json_to_dict(json_string):
+    import json
+    return json.loads(json_string)
+```
+
+これらの単語を選ぶ際には、プロジェクトの文脈やチームでの共通理解を重視するとよいでしょう。
