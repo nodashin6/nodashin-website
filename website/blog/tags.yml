@@ -3,6 +3,11 @@ python:
   permalink: /python
   description: Python tag description
 
+pydantic:
+  label: Pydantic
+  permalink: /pydantic
+  description: Pydantic is a data validation library in Python
+
 react:
   label: React
   permalink: /react

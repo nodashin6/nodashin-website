@@ -1,0 +1,79 @@
+---
+title: model_dump_jsonはstrを返す
+slug: model-dump-json
+authors: [nodashin]
+tags: [python, pydantic]
+---
+
+`pydantic.BaseModel.model_dump_json()`は、`dict`ではなく、`str`を返す。  
+そのため、Fileの書き込みはjsonモジュールではなく、printでおｋ。
+
+<!-- truncate -->
+
+`pydantic.BaseModel.model_dump()`の課題として、Enum型で定義した型をjsonに変換するときに、Errorが発生することがあります。
+
+```python
+from enum import Enum
+from pydantic import BaseModel
+
+class Department(Enum):
+    HR = "HumanResources"
+    IT = "InformationTechnology"
+    SALES = "Sales"
+
+class Person(BaseModel):
+    name: str
+    age: int
+    department: Department
+
+class Team(BaseModel):
+    name: str
+    people: list[Person]
+
+
+team = Team(
+    name="Development",
+    people=[
+        Person(name="Alice", age=30, department=Department.IT),
+        Person(name="Bob", age=24, department=Department.HR),
+    ]
+)
+```
+
+
+### write (success)
+
+```python
+
+with open("team.json", "w") as f:
+    f.write(team.model_dump_json())
+```
+
+### write (error)
+
+```python
+with open("team.json", "w") as f:
+    json.dump(team.model_dump(), f)
+# TypeError: Object of type Department is not JSON serializable
+```
+
+
+`pydantic.BaseModel.model_dump_json()`を使うと、Enum型がそのまま利用できます。ただし、返り値が文字列型で帰ってくるため、jsonモジュールではなく、printで書き込む必要があります。
+
+```python
+# 例
+
+team_json_str = team.model_dump_json()
+
+# write
+with open("team.json", "w") as f:
+    f.write(team_json_str)
+
+# read
+import json
+with open("team.json", "r") as f:
+    team_data = json.load(f)
+
+team_obj = Team(**team_data)
+print(team_obj)
+```
