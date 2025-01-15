@@ -1,0 +1,95 @@
+---
+title: local環境でrequestする
+slug: fastapi-test-client
+---
+
+local環境で自身のfastappにrequestを投げるには、  
+主にpytestに利用される `fastapi.testclient.TestClient` を使用する。
+
+開発途中でapiを設定して、起動したり止めたりするのが面倒になるときがある。  
+かといって、localに直書きしたようなコードを増やすと、  
+近い将来にAPIで開発しようとなったとき、開発工程の変更が生じる。  
+いわゆる、仕様変更とそれに伴う開発費用の増額。
+
+testClientで書いておけば、APIへの移行がスムーズになるだけでなく、  
+自然とソースコードの構造化が進み、バックエンドの開発がスムーズになる。
+
+
+<!-- truncate -->
+
+
+## main.pyに書くもの
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+class Item(BaseModel):
+    name: str
+    price: float
+    
+    
+app = FastAPI()
+
+
+@app.get("/items/{item_id}", response_model=Item)
+def get_item(item_id: int):
+    return Item(name="test", price=1.0)
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+```
+
+## local環境でのデモ
+
+```python
+import requests
+from fastapi.testclient import TestClient
+
+client = TestClient(app)
+
+def get_local_response():
+    return client.get("/items/1", headers={"X-Token": "coneofsilence"})
+```
+
+    
+## Test
+
+### 普通のrequest
+
+実行
+```python
+api_response = requests.get("http://localhost:8000/items/1")
+print('=== api response ===')
+print(f"{type(api_response)=}")
+print(f"{api_response.status_code=}")
+print(f"{api_response.json()=}")
+```
+出力
+```shell
+=== api response ===
+type(api_response)=<class 'requests.models.Response'>
+api_response.status_code=200
+api_response.json()={'name': 'test', 'price': 1.0}
+```
+
+### TestClientへのrequest
+
+実行
+```python
+local_response = get_local_response()
+print('=== local response ===')
+print(f"{type(local_response)=}")
+print(f"{local_response.status_code=}")
+print(f"{local_response.json()=}")
+```
+
+出力
+```shell
+=== local response ===
+type(local_response)=<class 'httpx.Response'>
+local_response.status_code=200
+local_response.json()={'name': 'test', 'price': 1.0}
+```

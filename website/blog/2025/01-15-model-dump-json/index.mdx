@@ -41,7 +41,14 @@ team = Team(
 ```
 
 
-### write (success)
+## 書き込み
+
+`pydantic.BaseModel.model_dump_json()`を使うと、Enum型がそのまま利用できます。ただし、返り値が文字列型で帰ってくるため、jsonモジュールではなく、printで書き込む必要があります。
+
+
+:::success
+これは実行可能
+:::
 
 ```python
 
@@ -49,16 +56,22 @@ with open("team.json", "w") as f:
     f.write(team.model_dump_json())
 ```
 
-### write (error)
+
+:::warning
+次のエラーが出る  
+TypeError: Object of type Department is not JSON serializable
+:::
 
 ```python
 with open("team.json", "w") as f:
     json.dump(team.model_dump(), f)
-# TypeError: Object of type Department is not JSON serializable
 ```
 
 
-`pydantic.BaseModel.model_dump_json()`を使うと、Enum型がそのまま利用できます。ただし、返り値が文字列型で帰ってくるため、jsonモジュールではなく、printで書き込む必要があります。
+## 読み込み
+
+読み込むときは、`json`で読み込めます。  
+※`f.read()`で`str`で読み込んで、`pydantic.BaseModel`への変換も可能
 
 ```python
 # 例

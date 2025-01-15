@@ -88,6 +88,11 @@ const config = {
             label: 'Python',
           },
           {to: '/blog', label: 'Blog', position: 'left'},
+          {
+            href: 'https://github.com/nodashin6/nodashin-website',
+            label: 'GitHub',
+            position: 'right',
+          },
         ],
       },
       footer: {
