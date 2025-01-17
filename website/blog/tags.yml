@@ -8,6 +8,11 @@ pydantic:
   permalink: /pydantic
   description: Pydantic is a data validation library in Python
 
+fastapi:
+  label: FastAPI
+  permalink: /fastapi
+  description: FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.6+ based on standard Python type hints.
+
 react:
   label: React
   permalink: /react
@@ -23,3 +28,21 @@ web:
   permalink: /web
   description: Web tag description
 
+
+
+# ----------------------------------------
+atcoder:
+  label: AtCoder
+  permalink: /atcoder
+  description: AtCoder tag description
+
+abc:
+  label: AtCoder Beginner Contest
+  permalink: /abc
+  description: AtCoder Beginner Contest tag description
+
+
+abc388:
+  label: AtCoder Beginner Contest 388
+  permalink: /abc388
+  description: AtCoder Beginner Contest 388 tag description
