@@ -29,6 +29,13 @@ web:
   description: Web tag description
 
 
+# ----------------------------------------
+management:
+  label: Management
+  permalink: /management
+  description: Management tag description
+
+
 
 # ----------------------------------------
 atcoder:
