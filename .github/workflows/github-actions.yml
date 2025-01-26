@@ -25,8 +25,7 @@ jobs:
       - name: Build website
         run: |
           cd ~/www/nodashin-website/website
-          rm package-lock.json
-          npm install
+          npm ci
           npm run build
 
       - name: Start server
