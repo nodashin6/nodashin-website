@@ -39,6 +39,11 @@ const config = {
     locales: ['ja'],
   },
 
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
+
   presets: [
     [
       'classic',
@@ -103,6 +108,9 @@ const config = {
         theme: prismThemes.github,
         darkTheme: prismThemes.vsDark,
       },
+      mermaid: {
+        theme: {light: 'neutral', dark: 'dark'},
+      },
     }
   ),
 
@@ -115,6 +123,7 @@ const config = {
       crossorigin: 'anonymous',
     },
   ],
+
 };
 
 export default config;

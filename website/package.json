@@ -14,22 +14,29 @@
     "write-heading-ids": "docusaurus write-heading-ids"
   },
   "dependencies": {
-    "@docusaurus/core": "3.6.3",
-    "@docusaurus/preset-classic": "3.6.3",
+    "@docusaurus/core": "^3.7.0",
+    "@docusaurus/preset-classic": "^3.7.0",
+    "@docusaurus/theme-mermaid": "^3.7.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "@mdx-js/react": "^3.0.0",
+    "@mui/icons-material": "^6.4.6",
+    "@mui/material": "^6.4.6",
+    "chart.js": "^4.4.7",
     "clsx": "^2.0.0",
     "framer-motion": "^11.15.0",
+    "katex": ">=0.16.21",
     "prism-react-renderer": "^2.3.0",
     "react": "^18.0.0",
+    "react-chartjs-2": "^5.3.0",
     "react-dom": "^18.0.0",
     "react-easy-crop": "^5.2.0",
     "rehype-katex": "^7.0.1",
-    "katex": ">=0.16.21",
     "remark-math": "^6.0.0"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.6.3",
-    "@docusaurus/types": "3.6.3"
+    "@docusaurus/module-type-aliases": "^3.7.0",
+    "@docusaurus/types": "^3.7.0"
   },
   "browserslist": {
     "production": [
