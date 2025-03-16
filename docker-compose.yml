@@ -4,7 +4,11 @@ services:
     ports:
       - "3050:3050"
     volumes:
+      # マウント
       - ./website:/app/website
+      # 除外
+      - /app/website/node_modules
+      - /app/website/.venv
     tty: true
     stdin_open: true
     working_dir: /app/website

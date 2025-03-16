@@ -23,3 +23,6 @@ yarn-error.log*
 # local file
 .env
 .local/
+
+# python for blog
+.venv/
