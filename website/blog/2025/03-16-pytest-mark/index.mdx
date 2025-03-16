@@ -1,0 +1,122 @@
+---
+title: pytest-mark
+slug: pytest-mark
+tags: [python, pytest]
+---
+
+pytest.mark の一般的な使い方
+
+:::warning
+まだ書きかけです。
+:::
+
+
+{/* truncate */}
+
+
+```
+マーク	説明
+@pytest.mark.asyncio	非同期関数をテストするためのマーク
+@pytest.mark.parametrize	テストをパラメータ化（複数の入力値で実行）
+@pytest.mark.slow	pytest -m "slow" で特定のグループを実行可能
+@pytest.mark.skip	このテストをスキップ
+@pytest.mark.xfail	失敗することを期待するテスト
+✅ まとめ
+pytest.mark は テストにメタ情報を付与するための機能。
+@pytest.mark.asyncio → 非同期テスト用。
+@pytest.mark.parametrize → パラメータ化して複数のテストを一度に実行。
+@pytest.mark.skip / @pytest.mark.xfail → スキップや失敗許容。
+テストの管理や分類、非同期処理のサポートに便利な機能です！
+
+
+
+
+poetry を使って、現在のパッケージのバージョンを取得し、特定のバージョン以下（または以上）でテストをスキップする方法を紹介します。
+
+方法1: importlib.metadata を使う
+Python 3.8 以上なら importlib.metadata（または importlib_metadata）を使ってパッケージのバージョンを取得できます。
+
+例: package_name のバージョンが 1.2.0 未満ならスキップ
+python
+コピーする
+編集する
+import pytest
+from importlib.metadata import version, PackageNotFoundError
+
+PACKAGE_NAME = "your_package"  # 実際のパッケージ名に置き換えてください
+
+try:
+    package_version = version(PACKAGE_NAME)
+except PackageNotFoundError:
+    package_version = "0.0.0"  # パッケージが見つからない場合はデフォルト値
+
+@pytest.mark.skipif(package_version < "1.2.0", reason="パッケージのバージョンが1.2.0未満のためスキップ")
+def test_feature():
+    assert some_function() == "expected"
+解説
+importlib.metadata.version(PACKAGE_NAME) でパッケージのバージョンを取得。
+version < "1.2.0" の場合にテストをスキップ。
+方法2: packaging.version を使ってバージョン比較を厳密に
+文字列比較ではなく、バージョンの正確な比較を行いたい場合は packaging.version を使うとよいです。
+
+python
+コピーする
+編集する
+import pytest
+from importlib.metadata import version, PackageNotFoundError
+from packaging.version import Version
+
+PACKAGE_NAME = "your_package"
+
+try:
+    package_version = Version(version(PACKAGE_NAME))
+except PackageNotFoundError:
+    package_version = Version("0.0.0")
+
+@pytest.mark.skipif(package_version < Version("1.2.0"), reason="パッケージのバージョンが1.2.0未満のためスキップ")
+def test_feature():
+    assert some_function() == "expected"
+packaging.version.Version を使うメリット
+"1.10.0" > "1.2.0" のような誤った比較を防ぐ。
+1.2.0-alpha のようなプレリリース版も正しく比較できる。
+方法3: pytest_addoption を使ってコマンドラインオプションで制御
+特定のバージョンをコマンドラインで指定し、スキップを制御する方法もあります。
+
+conftest.py
+python
+コピーする
+編集する
+import pytest
+from importlib.metadata import version
+from packaging.version import Version
+
+PACKAGE_NAME = "your_package"
+
+@pytest.fixture(scope="session")
+def package_version():
+    return Version(version(PACKAGE_NAME))
+
+def pytest_addoption(parser):
+    parser.addoption("--min-version", action="store", default="0.0.0", help="Minimum required package version")
+
+def pytest_runtest_setup(item):
+    min_version = Version(item.config.getoption("--min-version"))
+    current_version = Version(version(PACKAGE_NAME))
+    if current_version < min_version:
+        pytest.skip(f"パッケージのバージョン {current_version} が {min_version} 未満のためスキップ")
+使い方
+sh
+コピーする
+編集する
+pytest --min-version=1.2.0
+👉 バージョンの閾値をコマンドラインで変更できるので、柔軟なテストが可能！
+
+まとめ
+方法	メリット	デメリット
+importlib.metadata.version() を使う	シンプルにバージョン取得	文字列比較だと 1.10.0 < 1.2.0 の問題がある
+packaging.version.Version() を使う	厳密なバージョン比較が可能	packaging のインストールが必要
+pytest_addoption で制御	CLI で柔軟にバージョン制御	conftest.py が必要
+👉 シンプルなら importlib.metadata を使う。厳密に比較するなら packaging.version を使うのがオススメ！
+
+
+```

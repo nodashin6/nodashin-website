@@ -8,6 +8,11 @@ pydantic:
   permalink: /pydantic
   description: Pydantic is a data validation library in Python
 
+pytest:
+  label: Pytest
+  permalink: /pytest
+  description: Pytest is a testing framework for Python
+
 fastapi:
   label: FastAPI
   permalink: /fastapi
@@ -29,12 +34,22 @@ web:
   description: Web tag description
 
 
+mermaid:
+  label: Mermaid
+  permalink: /mermaid
+  description: Mermaid tag description
+
+
 # ----------------------------------------
 management:
   label: Management
   permalink: /management
   description: Management tag description
 
+business:
+  label: Business
+  permalink: /business
+  description: Business tag description
 
 
 # ----------------------------------------
