@@ -1,0 +1,6 @@
+{
+    "markdown-preview-enhanced.hideDefaultVSCodeMarkdownPreviewButtons": false,
+    "files.associations": {
+        "*.mdx": "markdown"
+    }
+}

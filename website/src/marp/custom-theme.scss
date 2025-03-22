@@ -1,0 +1,222 @@
+/* @theme custom-theme */
+
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap');
+
+:root {
+    --clr-primary-a0: #ffffff;
+    --clr-primary-a10: #cec7d4;
+    --clr-primary-a20: #9e92aa;
+    --clr-primary-a30: #716082;
+    --clr-primary-a40: #45315c;
+    --clr-primary-a50: #1c0538;
+    --clr-primary-a60: #1a042e;
+    --clr-primary-a70: #170324;
+    --clr-primary-a80: #12021b;
+    --clr-primary-a90: #0a0111;
+    --clr-primary-a100: #000000;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    height: 210mm;
+    width: 297mm;
+    color: var(--clr-primary-a10);
+}
+
+
+/* Modern Sepia-Themed Slide Styles */
+section {
+    display: block;
+    flex-direction: column;
+    background: linear-gradient(165deg,
+            var(--clr-primary-a80) 0%,
+            var(--clr-primary-a70) 40%,
+            var(--clr-primary-a100) 90%);
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1.6rem;
+    margin: 0;
+    padding-top: 1rem;
+}
+
+/* Styling page number */
+section::after {
+    font-weight: bold;
+    color: var(--clr-primary-a40);
+    content: 'Page ' attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
+    padding-right: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+
+header {
+    align-items: center;
+    padding: 1rem 2rem;
+    color: var(--clr-primary-a20);
+    position: relative;
+    /* Change position to relative */
+    top: 0px;
+}
+
+footer {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1rem 2rem;
+    background: var(--clr-primary-a80);
+    color: var(--clr-primary-a30);
+    position: fixed;
+    /* Ensure footer stays at the bottom of the viewport */
+    width: 100%;
+    /* Make footer span the full width */
+    box-sizing: border-box;
+    /* Include padding in width */
+    bottom: 0px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 600;
+    /* Bold headings */
+    margin: 0;
+}
+
+p {
+    line-height: 1.8;
+    margin: 0;
+}
+
+a {
+    color: #8b5e34;
+    /* Warm brown for links */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Slide Container */
+section.slides {
+    min-height: 100vh;
+}
+
+.slide-content {
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+}
+
+/* Typography Enhancements */
+h1 {
+    font-size: 6rem;
+    letter-spacing: 1px;
+}
+
+h2 {
+    font-size: 4rem;
+    color: var(--clr-primary-a20);
+    border-bottom: #716082 1px solid;
+    padding: 0.5rem 2rem;
+    margin-bottom: 2rem;
+}
+
+h3 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+li,
+p {
+    font-size: medium;
+    margin-bottom: 0.2rem;
+}
+
+
+pre {
+    background-color: var(--clr-primary-a100);
+    font-size: medium;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow:
+        1rem 1rem 2rem var(--clr-primary-a90),
+        -1rem -1rem 1rem var(--clr-primary-a60);
+    padding: 1rem;
+}
+
+code {
+    background-color: inherit;
+    /* Light gray background for inline code */
+    padding: 0.2rem 0.4rem;
+    /* Add padding for better readability */
+    border-radius: 0.3rem;
+    /* Rounded corners */
+}
+
+
+/* Cody syntax highlighting: tomorrow-night-blue */
+.hljs-comment,
+.hljs-quote {
+    color: #7285b7;
+}
+
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+    color: #ff9da4;
+}
+
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+    color: #ffc58f;
+}
+
+.hljs-attribute {
+    color: #ffeead;
+}
+
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+    color: #d1f1a9;
+}
+
+.hljs-title,
+.hljs-section {
+    color: #bbdaff;
+}
+
+.hljs-keyword,
+.hljs-selector-tag {
+    color: #ebbbff;
+}
+
+.hljs {
+    display: block;
+    overflow-x: auto;
+    background: #002451;
+    color: white;
+    padding: 0.5em;
+}
+
+.hljs-emphasis {
+    font-style: italic;
+}
+
+.hljs-strong {
+    font-weight: bold;
+}

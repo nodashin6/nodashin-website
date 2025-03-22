@@ -1,4 +1,5 @@
 backend/
+docs/
 
 .env*
 !.env.example

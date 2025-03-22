@@ -14,21 +14,74 @@
   --ifm-color-primary-lightest: #ac3cad;
   --ifm-code-font-size: 95%;
   --ifm-background-color: #e8e0f2;
+  --ifm-background-color-100: #f3edf9; /* 明るめ */
+  --ifm-background-color-200: #ede4f5;
+  --ifm-background-color-300: #e8e0f2; /* ベース */
+  --ifm-background-color-400: #dcd3eb;
+  --ifm-background-color-500: #d4c9e6;
+  --ifm-background-color-600: #c6b8dc;
+  --ifm-background-color-700: #b8a7d2;
+  --ifm-background-color-800: #aa96c8;
+  --ifm-background-color-900: #9c85be; /* 暗め */
+
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  --ifm-color-accent: #ff6f61; /* アクセントカラー */
+  --ifm-color-accent-light: #ff8a7a;
+  --ifm-color-accent-dark: #e65b55;
+
+  --ifm-color-secondary: #4caf50; /* 補助的なセカンダリーカラー */
+  --ifm-color-secondary-light: #66bb6a;
+  --ifm-color-secondary-dark: #388e3c;
+
+  --ifm-color-warning: #ff9800; /* 警告用カラー */
+  --ifm-color-warning-light: #ffb74d;
+  --ifm-color-warning-dark: #f57c00;
+
+  --ifm-color-info: #2196f3; /* 情報用カラー */
+  --ifm-color-info-light: #64b5f6;
+  --ifm-color-info-dark: #1976d2;
+
+
 }
 
 
-
- [data-theme='dark'] {
+/* Darkのときは、`dark`はコントラストが強くなるようにする */
+[data-theme='dark'] {
   --ifm-color-primary: #7325c1;
-  --ifm-color-primary-dark: #6721ae;
-  --ifm-color-primary-darker: #621fa4;
-  --ifm-color-primary-darkest: #501a87;
-  --ifm-color-primary-light: #7e29d4;
-  --ifm-color-primary-lighter: #8431d8;
-  --ifm-color-primary-lightest: #954edd;
+  --ifm-color-primary-light: #6721ae;
+  --ifm-color-primary-lighter: #621fa4;
+  --ifm-color-primary-lightest: #501a87;
+  --ifm-color-primary-dark: #7e29d4;
+  --ifm-color-primary-darker: #8431d8;
+  --ifm-color-primary-darkest: #954edd;
   --ifm-background-color: #080012 !important;
+  --ifm-background-color-100: #1a0033; /* 明るめ */
+  --ifm-background-color-200: #140029;
+  --ifm-background-color-300: #0f001f;
+  --ifm-background-color-400: #0b0017;
+  --ifm-background-color-500: #080012; /* ベース */
+  --ifm-background-color-600: #06000e;
+  --ifm-background-color-700: #05000c;
+  --ifm-background-color-800: #04000a;
+  --ifm-background-color-900: #030008; /* 暗め */
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+
+  --ifm-color-accent: #ff8a7a;
+  --ifm-color-accent-light: #ffb3a2;
+  --ifm-color-accent-dark: #e6756b;
+
+  --ifm-color-secondary: #66bb6a;
+  --ifm-color-secondary-light: #81c784;
+  --ifm-color-secondary-dark: #4caf50;
+
+  --ifm-color-warning: #ffa726;
+  --ifm-color-warning-light: #ffcc80;
+  --ifm-color-warning-dark: #fb8c00;
+
+  --ifm-color-info: #42a5f5;
+  --ifm-color-info-light: #90caf9;
+  --ifm-color-info-dark: #1e88e5;
 }
 
 /* DEFAULT */
