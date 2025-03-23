@@ -1,0 +1,94 @@
+---
+title: Dockerでユーザー入力を実行したい
+slug: run-user-scripts-with-docker-intro
+---
+
+
+## 目的
+ユーザーが入力したスクリプトを指定のイメージで実行する
+
+
+
+## コード
+
+```python
+import subprocess
+import tempfile
+import os
+
+IMAGE_NAME = "python-env-01"
+DOCKER_FILE = """
+FROM python:3.13.2-bookworm
+
+COPY script.py /app/script.py
+WORKDIR /app
+"""
+
+TEST_CASE_01_INPUT = """\
+1 2
+"""
+
+TEST_CASE_01_OUTPUT = """\
+3
+"""
+
+TEST_CASE_02_INPUT = """\
+3 4
+"""
+
+TEST_CASE_02_OUTPUT = """\
+7
+"""
+
+TEST_CASES = [
+    (TEST_CASE_01_INPUT, TEST_CASE_01_OUTPUT),
+    (TEST_CASE_02_INPUT, TEST_CASE_02_OUTPUT),
+]
+
+
+USER_SCRIPT = """\
+a, b = map(int, input().split())
+print(a + b)
+"""
+
+
+# Build the Docker image
+def build_docker_image():
+    with tempfile.TemporaryDirectory() as temp_dir:
+        dockerfile_path = os.path.join(temp_dir, "Dockerfile")
+        with open(dockerfile_path, "w") as f:
+            f.write(DOCKER_FILE)
+
+        user_script_path = os.path.join(temp_dir, "script.py")
+        with open(user_script_path, "w") as f:
+            f.write(USER_SCRIPT)
+
+        subprocess.run(["docker", "build", "-t", IMAGE_NAME, temp_dir], check=True)
+
+
+# Run test cases
+def run_test_cases():
+    for i, (test_input, expected_output) in enumerate(TEST_CASES, 1):
+        result = subprocess.run(
+            ["docker", "run", "--rm", "-i", IMAGE_NAME, "python", "/app/script.py"],
+            input=test_input,
+            text=True,
+            capture_output=True,
+        )
+        if result.returncode != 0:
+            print(f"Test case {i}: Error")
+            print(f"Stderr: {result.stderr.strip()}")
+            continue
+
+        if result.stdout.strip() == expected_output.strip():
+            print(f"Test case {i}: Passed")
+        else:
+            print(f"Test case {i}: Failed")
+            print(f"Expected: {expected_output.strip()}, Got: {result.stdout.strip()}")
+
+
+if __name__ == "__main__":
+    build_docker_image()
+    run_test_cases()
+
+```
