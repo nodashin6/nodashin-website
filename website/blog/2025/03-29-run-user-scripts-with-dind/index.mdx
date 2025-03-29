@@ -1,0 +1,300 @@
+---
+title: DinDでユーザー入力を実行したい
+slug: run-user-scripts-with-dind
+---
+
+
+## 目的
+ユーザーが入力したスクリプトを指定のイメージで実行する（DinDバージョン）
+
+
+{/* truncate */}
+
+## 感想
+Claude-3.7 Sonnetを使っているが、動くプログラムにするまでは結構大変だった。
+dindは、tls暗号化をするorしないでport番号が異なるが、今回は暗号化しません（tcp://dind:2375）
+
+
+## 環境
+
+### docker-compose.yml
+command: ["dockerd", "--host=tcp://0.0.0.0:2375"]がないと、dindがlistenしないので、
+backendからdind内にimageをビルドすることができない。
+
+```
+services:
+
+  dind:
+    build:
+      context: ./dind
+      dockerfile: Dockerfile
+    ports:
+      - "2375:2375"
+      - "2376:2376"
+    privileged: true
+    depends_on:
+      - backend
+    volumes:
+      - dind-data:/var/lib/docker
+    networks:
+      - app-network
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    command: ["dockerd", "--host=tcp://0.0.0.0:2375"]
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+    volumes:
+      - ./backend:/code
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - SUPABASE_URL=http://${GATEWAY_IPv4}:${SUPABASE_PORT}
+      - SUPABASE_KEY=${SUPABASE_ANON_KEY}
+      - BACKEND_PORT=${BACKEND_PORT}
+    tty: true
+    stdin_open: true
+    networks:
+      - app-network
+    extra_hosts:
+      - host.docker.internal:host-gateway
+```
+
+
+## コード
+
+```python
+import subprocess
+import tempfile
+import os
+import sys
+import time
+import socket
+
+
+IMAGE_NAME = "python-env-01"
+DOCKER_FILE = """
+FROM python:3.13.2-bookworm
+
+WORKDIR /app
+"""
+
+TEST_CASE_01_INPUT = """\
+1 2
+"""
+
+TEST_CASE_01_OUTPUT = """\
+3
+"""
+
+TEST_CASE_02_INPUT = """\
+3 4
+"""
+
+TEST_CASE_02_OUTPUT = """\
+7
+"""
+
+TEST_CASES = [
+    (TEST_CASE_01_INPUT, TEST_CASE_01_OUTPUT),
+    (TEST_CASE_02_INPUT, TEST_CASE_02_OUTPUT),
+]
+
+
+USER_SCRIPT = """\
+a, b = map(int, input().split())
+print(a + b) # 出力
+"""
+
+# Docker接続設定 - 複数の接続方法を試す
+CONNECTION_OPTIONS = [
+    "tcp://dind:2375",  # DINDサービス（TLSなし）
+]
+
+
+# ホスト名がpingで到達可能か確認
+def check_host_reachable(hostname):
+    try:
+        # ホスト名からIPアドレスを解決
+        ip_address = socket.gethostbyname(hostname)
+        print(f"✓ ホスト名 '{hostname}' は '{ip_address}' に解決されました")
+        return True
+    except socket.gaierror:
+        print(f"✗ ホスト名 '{hostname}' は解決できませんでした")
+        return False
+
+
+# Docker コマンドのベース部分を構築
+def get_docker_command(docker_host):
+    if docker_host:
+        if docker_host.startswith("/"):  # Unixソケットの場合
+            return ["docker", "-H", f"unix://{docker_host}"]
+        else:  # TCP接続の場合
+            return ["docker", "--host", docker_host]
+    else:
+        return ["docker"]  # デフォルト接続
+
+
+def show_docker_images(docker_host: str) -> None:
+    # Dockerコマンドの構築
+    docker_cmd = ["docker", "--host", docker_host, "images"]
+
+    # コマンド実行
+    print("🔍 DINDのイメージリスト取得中...")
+    result = subprocess.run(docker_cmd, capture_output=True, text=True)
+    print("🔍 DINDのイメージリスト取得完了")
+    print(f"=" * 40)
+    print("🔍 DINDのイメージリスト:")
+    print(result.stdout.strip())
+    print(f"=" * 40)
+
+
+# Dockerが利用可能かチェック（複数接続先を試す）
+def find_working_docker_connection():
+    # DINDホスト名が解決できるか確認
+    print("🔍 Dockerホスト名の解決をチェックしています...")
+    if "dind" in CONNECTION_OPTIONS[0]:
+        check_host_reachable("dind")
+
+    print("🔄 複数の接続方法を試しています...")
+
+    # 各接続方法を試す
+    for docker_host in CONNECTION_OPTIONS:
+        try:
+            host_display = docker_host if docker_host else "デフォルト接続"
+            print(f"🔌 Docker接続を試行中: {host_display}")
+
+            cmd = get_docker_command(docker_host) + [
+                "version",
+                "--format",
+                "'{{.Server.Version}}'",
+            ]
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=5)
+
+            if result.returncode == 0:
+                print(
+                    f"✅ Docker接続成功！({host_display}) - バージョン: {result.stdout.strip()}"
+                )
+                return docker_host
+            else:
+                print(f"❌ 接続失敗: {host_display} - {result.stderr.strip()}")
+        except subprocess.TimeoutExpired:
+            print(f"⏱️ タイムアウト: {host_display}")
+        except Exception as e:
+            print(f"⚠️ エラー発生: {host_display} - {str(e)}")
+
+    print("😭 すべての接続方法に失敗しました")
+    return None
+
+
+# Build the Docker image
+def build_docker_image(docker_host):
+    with tempfile.TemporaryDirectory() as temp_dir:
+        dockerfile_path = os.path.join(temp_dir, "Dockerfile")
+        with open(dockerfile_path, "w") as f:
+            f.write(DOCKER_FILE)
+
+        try:
+            print(f"🏗️ Docker イメージ '{IMAGE_NAME}' をビルド中...")
+            cmd = get_docker_command(docker_host) + [
+                "build",
+                "-t",
+                IMAGE_NAME,
+                temp_dir,
+            ]
+            subprocess.run(cmd, check=True)
+            print(f"🚀 Docker イメージ '{IMAGE_NAME}' のビルドに成功したよ！")
+        except subprocess.CalledProcessError as e:
+            print(f"😭 Docker イメージのビルドに失敗しちゃった: {e}")
+            sys.exit(1)
+
+
+# Run test cases
+def run_test_cases(docker_host):
+    for i, (test_input, expected_output) in enumerate(TEST_CASES, 1):
+        # スクリプトをエコーして、それをpythonコマンドにパイプする
+        docker_cmd = f'echo "{USER_SCRIPT}" > /app/script.py && python /app/script.py'
+
+        try:
+            print(f"🧪 テストケース {i} を実行中...")
+            TIMEOUT = 5  # seconds
+            cmd = get_docker_command(docker_host) + [
+                "run",
+                "--rm",
+                "-i",
+                IMAGE_NAME,
+                "bash",
+                "-c",
+                docker_cmd,
+            ]
+            result = subprocess.run(
+                cmd,
+                input=test_input,
+                text=True,
+                capture_output=True,
+                timeout=TIMEOUT,
+            )
+            if result.returncode != 0:
+                print(f"テストケース {i}: エラー 😱")
+                print(f"エラー内容: {result.stderr.strip()}")
+                continue
+            if result.stdout.strip() == expected_output.strip():
+                print(f"テストケース {i}: 成功 ✅")
+            else:
+                print(f"テストケース {i}: 失敗 ❌")
+                print(f"期待: {expected_output.strip()}, 実際: {result.stdout.strip()}")
+        except Exception as e:
+            print(f"テストケース {i} の実行中にエラーが発生したよ: {e}")
+
+
+if __name__ == "__main__":
+    print("🔍 利用可能なDocker接続を探しています...")
+    docker_host = find_working_docker_connection()
+    show_docker_images(docker_host)
+    if docker_host is None:
+        print("🚫 Docker接続に失敗しました。Docker環境を確認してね！")
+        print(
+            "💡 ヒント: DINDサービスが起動しているか、正しいネットワーク設定になっているか確認してみて！"
+        )
+        sys.exit(1)
+
+    # 動作するDocker接続を使ってビルドとテストを実行
+    build_docker_image(docker_host)
+    run_test_cases(docker_host)
+
+```
+
+
+## 出力
+```shell
+🔍 利用可能なDocker接続を探しています...
+🔍 Dockerホスト名の解決をチェックしています...
+✓ ホスト名 'dind' は '172.24.1.4' に解決されました
+🔄 複数の接続方法を試しています...
+🔌 Docker接続を試行中: tcp://dind:2375
+✅ Docker接続成功！(tcp://dind:2375) - バージョン: '20.10.24'
+🔍 DINDのイメージリスト取得中...
+🔍 DINDのイメージリスト取得完了
+========================================
+🔍 DINDのイメージリスト:
+REPOSITORY      TAG               IMAGE ID       CREATED          SIZE
+python-env-01   latest            90a17c949820   24 minutes ago   1.02GB
+python          3.13.2-bookworm   e6c8fe2e1108   7 weeks ago      1.02GB
+========================================
+🏗️ Docker イメージ 'python-env-01' をビルド中...
+Sending build context to Docker daemon  2.048kB
+Step 1/2 : FROM python:3.13.2-bookworm
+ ---> e6c8fe2e1108
+Step 2/2 : WORKDIR /app
+ ---> Using cache
+ ---> 90a17c949820
+Successfully built 90a17c949820
+Successfully tagged python-env-01:latest
+🚀 Docker イメージ 'python-env-01' のビルドに成功したよ！
+🧪 テストケース 1 を実行中...
+テストケース 1: 成功 ✅
+🧪 テストケース 2 を実行中...
+テストケース 2: 成功 ✅
+```
