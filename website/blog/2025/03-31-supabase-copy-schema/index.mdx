@@ -1,0 +1,124 @@
+---
+title: supabaseでshemaをコピーしたいとき
+slug: supabase-copy-schema
+---
+
+## 目的
+
+pytestなどで、publicのスキーマを操作したくないとき。
+branchを分ける管理が面倒くさい人向け
+
+
+{/* truncate */}
+
+
+## 内容
+
+- shemaのtableをコピーする
+- 外部キー制約を追加する（DELETE CASCADEなどが動作するように）
+
+
+## コード
+
+publicをそのままコピーして、pytest_publicにするSQL
+
+```sql
+-- Create the pytest schema if it doesn't exist
+CREATE SCHEMA IF NOT EXISTS pytest_public;
+
+DO $$
+DECLARE
+    table_name TEXT;
+    constraint_info RECORD;
+    create_fk_sql TEXT;
+    fk_cursor REFCURSOR;
+BEGIN
+    -- Loop through all tables in the public schema
+    FOR table_name IN
+        SELECT t.table_name
+        FROM information_schema.tables t
+        WHERE t.table_schema = 'public'
+          AND t.table_type = 'BASE TABLE'
+    LOOP
+        -- テーブル構造をコピー (外部キー制約なし)
+        EXECUTE format(
+            'CREATE TABLE pytest_public.%I (LIKE public.%I INCLUDING DEFAULTS INCLUDING CONSTRAINTS INCLUDING INDEXES);',
+            table_name,
+            table_name
+        );
+    END LOOP;
+    
+    -- 外部キー制約を別途追加（スキーマを修正して参照先を pytest_public に変更）
+    OPEN fk_cursor FOR
+        SELECT 
+            tc.table_name as table_name,
+            kcu.column_name as column_name,
+            ccu.table_name AS foreign_table_name,
+            ccu.column_name AS foreign_column_name,
+            rc.delete_rule
+        FROM 
+            information_schema.table_constraints AS tc 
+            JOIN information_schema.key_column_usage AS kcu
+              ON tc.constraint_name = kcu.constraint_name
+              AND tc.table_schema = kcu.table_schema
+            JOIN information_schema.constraint_column_usage AS ccu
+              ON ccu.constraint_name = tc.constraint_name
+              AND ccu.table_schema = tc.table_schema
+            JOIN information_schema.referential_constraints AS rc
+              ON rc.constraint_name = tc.constraint_name
+              AND rc.constraint_schema = tc.table_schema
+        WHERE tc.constraint_type = 'FOREIGN KEY'
+          AND tc.table_schema = 'public';
+          
+    LOOP
+        FETCH fk_cursor INTO constraint_info;
+        EXIT WHEN NOT FOUND;
+        
+        -- 外部キー制約を追加
+        create_fk_sql := format(
+            'ALTER TABLE pytest_public.%I ADD CONSTRAINT %I_fk FOREIGN KEY (%I) REFERENCES pytest_public.%I(%I)',
+            constraint_info.table_name,
+            constraint_info.table_name || '_' || constraint_info.column_name,
+            constraint_info.column_name,
+            constraint_info.foreign_table_name,
+            constraint_info.foreign_column_name
+        );
+        
+        -- DELETE RULEを適用
+        IF constraint_info.delete_rule = 'CASCADE' THEN
+            create_fk_sql := create_fk_sql || ' ON DELETE CASCADE';
+        ELSIF constraint_info.delete_rule = 'SET NULL' THEN
+            create_fk_sql := create_fk_sql || ' ON DELETE SET NULL';
+        ELSIF constraint_info.delete_rule = 'SET DEFAULT' THEN
+            create_fk_sql := create_fk_sql || ' ON DELETE SET DEFAULT';
+        ELSIF constraint_info.delete_rule = 'RESTRICT' THEN
+            create_fk_sql := create_fk_sql || ' ON DELETE RESTRICT';
+        END IF;
+        
+        create_fk_sql := create_fk_sql || ';';
+        
+        -- 外部キー制約のSQLを実行
+        EXECUTE create_fk_sql;
+    END LOOP;
+    
+    CLOSE fk_cursor;
+END $$;
+
+-- スキーマに対する基本的な使用権限を付与
+GRANT USAGE ON SCHEMA pytest_public TO anon, authenticated, service_role;
+
+-- スキーマ内のすべてのテーブルに対する権限を付与
+GRANT ALL ON ALL TABLES IN SCHEMA pytest_public TO anon, authenticated, service_role;
+
+-- スキーマ内のすべてのルーチン（関数やプロシージャ）に対する権限を付与
+GRANT ALL ON ALL ROUTINES IN SCHEMA pytest_public TO anon, authenticated, service_role;
+
+-- スキーマ内のすべてのシーケンスに対する権限を付与
+GRANT ALL ON ALL SEQUENCES IN SCHEMA pytest_public TO anon, authenticated, service_role;
+
+-- デフォルト権限を設定（新しく作成されるオブジェクトにも適用されるようにする）
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA pytest_public GRANT ALL ON TABLES TO anon, authenticated, service_role;
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA pytest_public GRANT ALL ON ROUTINES TO anon, authenticated, service_role;
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA pytest_public GRANT ALL ON SEQUENCES TO anon, authenticated, service_role;
+
+```
