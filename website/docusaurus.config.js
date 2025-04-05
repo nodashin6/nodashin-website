@@ -9,6 +9,9 @@ import rehypeKatex from 'rehype-katex';
 
 import {themes as prismThemes} from 'prism-react-renderer';
 
+
+import tailwindPlugin from './plugins/tailwind-config.cjs';
+
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 /** @type {import('@docusaurus/types').Config} */
@@ -123,6 +126,10 @@ const config = {
       crossorigin: 'anonymous',
     },
   ],
+
+  plugins: [
+    tailwindPlugin,
+  ]
 
 };
 
