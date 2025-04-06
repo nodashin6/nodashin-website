@@ -1,0 +1,108 @@
+---
+title: Code Trainerをプレイしてみた
+slug: code-trainer-played
+---
+
+よくわからないローカル環境で競プロできる  
+Code Trainer をプレイしてみた
+
+{/* truncate */}
+
+import DocusaurusImageUrl from './2025-04-06 214906.png';
+
+
+## 評価
+
+良かった点
+
+- コンセプト〇：
+    ローカルで実行できるのは面白い
+    アイディア自体というより、ちゃんと実装してゲームとしてリリースしていることが素直にスゴイ。
+- ボリューム〇：
+    全ての問題をこなすには、20 ~ 50時間は遊べそう
+
+悪かった点
+
+- コード補完✖：
+    VSCodeになれた私に、テキストエディタは辛い
+- 解説✖：
+    問題を解かせるだけで解説が見当たらない。見つけられていないだけならごめんなさい。
+- 実行環境✖：
+    Pythonのライブラリが少ない気がする。
+- 実行システム？：
+    たぶん時間内に答えを出せばＯＫだと思うので、多コア＋マルチ処理などでごり押しできそう。
+
+
+## 特記事項
+
+結構問題むずくね？
+
+文章を単語で区切って出力する問題
+
+<img
+    src={DocusaurusImageUrl}
+/>
+
+コード全体は下記参照。
+計算量は入力されるテキストの長さを$N$として、$O(N^3)$
+面倒なのでローリングハッシュではなく、pythonの標準のハッシュ関数を使用した。
+ローリングハッシュだと任意の区間のハッシュが$O(1)$で取得できるので、$O(N^2)$になるのかな？？
+
+```python
+import heapq
+
+N = 1024
+
+
+class Solution:
+    def add_spaces(self, text: str, words: list[str]) -> str:
+        wc = WordCollection()
+        for word in words:
+            wc.add(word)
+
+        n = len(text)
+        graph = [set() for _ in range(n + 1)]
+        for i in range(n):
+            for j in range(i + 1, n + 1):
+                m = j - i - 1
+                s = text[i:j]
+                if s in wc:
+                    graph[i].add(j)
+        seen = [-1] * (n + 1)
+        seen[0] = 0
+        hq = [0]
+        while hq:
+            i = heapq.heappop(hq)
+            for j in graph[i]:
+                if seen[j] != -1:
+                    continue
+                seen[j] = i
+                heapq.heappush(hq, j)
+        if seen[n] == -1:
+            ans = text
+        else:
+            ans_list = []
+            j = n
+            while 0 < j:
+                i = seen[j]
+                ans_list.append(text[i:j])
+                j = i
+            ans = " ".join(ans_list[::-1])
+        return ans
+
+
+class WordCollection:
+
+    def __init__(self):
+        self.a = [set() for _ in range(N)]
+
+    def add(self, word: str) -> None:
+        i = len(word) - 1
+        self.a[i].add(hash(word))
+
+    def __contains__(self, word: str) -> bool:
+        i = len(word) - 1
+        h = hash(word)
+        return h in self.a[i]
+
+```
