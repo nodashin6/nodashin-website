@@ -1,0 +1,201 @@
+Sequence,Time,File,RangeOffset,RangeLength,Text,Language,Type
+1,3,"main.py",0,0,"",python,tab
+2,1872,"main.py",0,0,"k",python,content
+3,2060,"main.py",1,0,"y",python,content
+4,2150,"main.py",2,0,"o",python,content
+5,3001,"main.py",0,3,"# ╔════════════════════════════════════════════════════════════════════════════════════╗\r\n# ║  Main                                                                              ║\r\n# ╚════════════════════════════════════════════════════════════════════════════════════╝\r\n\r\n\r\ndef main():\r\n    return\r\n\r\n\r\n# ╔════════════════════════════════════════════════════════════════════════════════════╗\r\n# ║  Libraries                                                                         ║\r\n# ║    See Also : https://github.com/nodashin6/atcoder                                 ║\r\n# ╚════════════════════════════════════════════════════════════════════════════════════╝\r\n\r\n\r\n# ╔════════════════════════════════════════════════════════════════════════════════════╗\r\n# ║  Helper Functions                                                                  ║\r\n# ╚════════════════════════════════════════════════════════════════════════════════════╝\r\n\r\n\r\nimport sys\r\n\r\n\r\ndef input() -> str:\r\n    return sys.stdin.readline().rstrip()\r\n\r\n\r\n# ╔════════════════════════════════════════════════════════════════════════════════════╗\r\n# ║  Entry Point                                                                       ║\r\n# ╚════════════════════════════════════════════════════════════════════════════════════╝\r\n\r\n\r\nif __name__ == '__main__':\r\n    main()\r\n",python,content
+6,5393,"main.py",291,6,"N",python,content
+7,5934,"main.py",292,0," ",python,content
+8,6078,"main.py",293,0,"=",python,content
+9,6230,"main.py",294,0," ",python,content
+10,6966,"main.py",287,8,"    N = int(input())",python,content
+11,7771,"main.py",307,0,"\r\n    ",python,content
+12,8790,"main.py",313,0,"A",python,content
+13,8990,"main.py",314,0," ",python,content
+14,9134,"main.py",315,0,"=",python,content
+15,9238,"main.py",316,0," ",python,content
+16,9622,"main.py",317,0,"l",python,content
+17,10022,"main.py",318,0,"m",python,content
+18,10117,"main.py",319,0,"i",python,content
+19,10575,"main.py",320,0,"()",python,content
+20,10999,"main.py",321,1,")",python,content
+21,11630,"main.py",317,5,"list(map(int, input().split()))",python,content
+22,12005,"main.py",348,0,"\r\n    ",python,content
+23,38585,"main.py",354,0,"d",python,content
+24,38718,"main.py",355,0," ",python,content
+25,38838,"main.py",356,0,"=",python,content
+26,38943,"main.py",357,0," ",python,content
+27,39582,"main.py",358,0,"{}",python,content
+28,40818,"main.py",360,0,"\r\n    ",python,content
+29,41446,"main.py",366,0,"f",python,content
+30,41591,"main.py",367,0,"o",python,content
+31,41630,"main.py",368,0,"r",python,content
+32,41695,"main.py",369,0," ",python,content
+33,44487,"main.py",370,0,"i",python,content
+34,44734,"main.py",371,0,",",python,content
+35,44825,"main.py",372,0," ",python,content
+36,44966,"main.py",373,0,"a",python,content
+37,45126,"main.py",374,0,"i",python,content
+38,45262,"main.py",375,0," ",python,content
+39,45334,"main.py",376,0,"i",python,content
+40,45508,"main.py",377,0,"n",python,content
+41,45617,"main.py",378,0," ",python,content
+42,49591,"main.py",379,0,"e",python,content
+43,49743,"main.py",380,0,"n",python,content
+44,50095,"main.py",381,0,"u",python,content
+45,50303,"main.py",382,0,"m",python,content
+46,50421,"main.py",383,0,"e",python,content
+47,50887,"main.py",384,0,"r",python,content
+48,51056,"main.py",385,0,"a",python,content
+49,51229,"main.py",386,0,"t",python,content
+50,51349,"main.py",387,0,"e",python,content
+51,51838,"main.py",388,0,"()",python,content
+52,52240,"main.py",389,0,"A",python,content
+53,52887,"main.py",391,0,":",python,content
+54,53310,"main.py",392,0,"\r\n        ",python,content
+55,56934,"main.py",402,0,"b",python,content
+56,57110,"main.py",403,0," ",python,content
+57,57190,"main.py",404,0,"=",python,content
+58,57351,"main.py",405,0," ",python,content
+59,58029,"main.py",406,0,"d",python,content
+60,58260,"main.py",407,0,".",python,content
+61,58485,"main.py",408,0,"g",python,content
+62,58590,"main.py",409,0,"e",python,content
+63,58717,"main.py",410,0,"t",python,content
+64,58982,"main.py",411,0,"()",python,content
+65,59902,"main.py",412,0,"a",python,content
+66,60038,"main.py",413,0,"i",python,content
+67,60294,"main.py",414,0,",",python,content
+68,60414,"main.py",415,0," ",python,content
+69,60863,"main.py",416,0,"[]",python,content
+70,61614,"main.py",419,0,"\r\n        ",python,content
+71,65198,"main.py",429,0,"b",python,content
+72,65430,"main.py",430,0,"l",python,content
+73,65909,"main.py",430,1,"",python,content
+74,66118,"main.py",430,0,".",python,content
+75,66189,"main.py",431,0,"a",python,content
+76,66398,"main.py",432,0,"p",python,content
+77,66526,"main.py",433,0,"p",python,content
+78,66605,"main.py",434,0,"e",python,content
+79,66742,"main.py",435,0,"n",python,content
+80,66813,"main.py",436,0,"d",python,content
+81,67038,"main.py",437,0,"()",python,content
+82,67630,"main.py",438,0,"i",python,content
+83,68647,"main.py",438,2,"int(input())",python,content
+84,69447,"main.py",438,12,"i)",python,content
+85,70022,"main.py",440,0,"\r\n        ",python,content
+86,72229,"main.py",442,8,"        d[ai] = b",python,content
+87,72478,"main.py",459,0,"\r\n        ",python,content
+88,75254,"main.py",465,4,"",python,content
+89,76184,"main.py",465,0,"f",python,content
+90,76374,"main.py",466,0,"o",python,content
+91,76399,"main.py",467,0,"r",python,content
+92,76597,"main.py",468,0," ",python,content
+93,78384,"main.py",469,0,"k",python,content
+94,78645,"main.py",470,0,",",python,content
+95,78774,"main.py",471,0," ",python,content
+96,80006,"main.py",472,0,"b",python,content
+97,87773,"main.py",469,1,"",python,content
+98,88066,"main.py",469,0,"_",python,content
+99,88830,"main.py",473,0," ",python,content
+100,90416,"main.py",474,0,"i",python,content
+101,90566,"main.py",475,0,"n",python,content
+102,90670,"main.py",476,0," ",python,content
+103,90854,"main.py",477,0,"d",python,content
+104,91287,"main.py",478,0,".",python,content
+105,91735,"main.py",479,0,"i",python,content
+106,91837,"main.py",480,0,"t",python,content
+107,91909,"main.py",481,0,"e",python,content
+108,92005,"main.py",482,0,"m",python,content
+109,92182,"main.py",483,0,"s",python,content
+110,92471,"main.py",484,0,"()",python,content
+111,92606,"main.py",485,1,")",python,content
+112,93200,"main.py",486,0,":",python,content
+113,93574,"main.py",487,0,"\r\n        ",python,content
+114,95127,"main.py",459,0,"\r\n        ",python,content
+115,95525,"main.py",465,4,"",python,content
+116,95678,"main.py",465,0,"a",python,content
+117,95886,"main.py",466,0,"n",python,content
+118,95925,"main.py",467,0,"s",python,content
+119,96094,"main.py",468,0," ",python,content
+120,96253,"main.py",469,0,"=",python,content
+121,96342,"main.py",470,0," ",python,content
+122,103743,"main.py",471,0,"1",python,content
+123,104174,"main.py",472,0,"<",python,content
+124,104302,"main.py",473,0,"<",python,content
+125,104671,"main.py",474,0,"6",python,content
+126,104814,"main.py",475,0,"0",python,content
+127,106398,"main.py",504,0,"\r\n        ",python,content
+128,115911,"main.py",514,0,"f",python,content
+129,116013,"main.py",515,0,"o",python,content
+130,116629,"main.py",516,0,"r",python,content
+131,116824,"main.py",517,0," ",python,content
+132,118352,"main.py",518,0,"l",python,content
+133,118622,"main.py",519,0,",",python,content
+134,118697,"main.py",520,0," ",python,content
+135,118885,"main.py",521,0,"r",python,content
+136,119118,"main.py",522,0," ",python,content
+137,119631,"main.py",523,0,"i",python,content
+138,119815,"main.py",524,0,"n",python,content
+139,119878,"main.py",525,0," ",python,content
+140,120718,"main.py",526,0,"z",python,content
+141,120815,"main.py",527,0,"i",python,content
+142,120926,"main.py",528,0,"p",python,content
+143,121743,"main.py",529,0,"()",python,content
+144,122111,"main.py",530,0,"b",python,content
+145,122926,"main.py",531,0,",",python,content
+146,123038,"main.py",532,0," ",python,content
+147,123670,"main.py",533,0,"b",python,content
+148,124559,"main.py",534,0,"[]",python,content
+149,124943,"main.py",535,0,"1",python,content
+150,125326,"main.py",536,0,":",python,content
+151,125976,"main.py",539,0,":",python,content
+152,126310,"main.py",540,0,"\r\n            ",python,content
+153,127949,"main.py",542,12,"            ans = min(ans, r - l)",python,content
+154,134695,"main.py",531,0,"[]",python,content
+155,135134,"main.py",532,0,":",python,content
+156,135517,"main.py",533,0,"-",python,content
+157,135597,"main.py",534,0,"1",python,content
+158,136510,"main.py",504,0,"\r\n        ",python,content
+159,137095,"main.py",514,0,"i",python,content
+160,137181,"main.py",515,0,"f",python,content
+161,137309,"main.py",516,0," ",python,content
+162,138685,"main.py",506,11,"        if len(b) == 1:\r\n            continue",python,content
+163,141468,"main.py",633,4,"",python,content
+164,141840,"main.py",633,0,"a",python,content
+165,142316,"main.py",633,1,"",python,content
+166,142573,"main.py",633,0,"p",python,content
+167,142733,"main.py",634,0,"r",python,content
+168,142782,"main.py",635,0,"i",python,content
+169,142950,"main.py",636,0,"n",python,content
+170,142997,"main.py",637,0,"t",python,content
+171,143197,"main.py",638,0,"()",python,content
+172,143389,"main.py",639,0,"a",python,content
+173,143542,"main.py",640,0,"n",python,content
+174,143646,"main.py",641,0,"s",python,content
+175,147270,"main.py",627,0,"\r\n            ",python,content
+176,147596,"main.py",637,4,"",python,content
+177,148085,"main.py",633,4,"",python,content
+178,151342,"main.py",633,0,"i",python,content
+179,151445,"main.py",634,0,"f",python,content
+180,151533,"main.py",635,0," ",python,content
+181,152245,"main.py",629,7,"    if ans == 1<<60:",python,content
+182,152822,"main.py",649,0,"\r\n        ",python,content
+183,153253,"main.py",659,0,"a",python,content
+184,153668,"main.py",659,1,"",python,content
+185,154109,"main.py",651,8,"        ans = -1",python,content
+186,154559,"main.py",1708,1,"""",python,content
+186,154559,"main.py",1708,1,"""",python,content
+186,154559,"main.py",1708,1,"""",python,content
+186,154559,"main.py",1708,1,"""",python,content
+186,154559,"main.py",1708,1,"""",python,content
+186,154559,"main.py",1708,1,"""",python,content
+187,154560,"main.py",1699,1,"""",python,content
+188,154560,"main.py",646,0," ",python,content
+190,154561,"main.py",474,0," ",python,content
+189,154561,"main.py",644,0," ",python,content
+191,154561,"main.py",472,0," ",python,content
+192,177061,"main.py",628,0," ",python,content
+193,177223,"main.py",629,0,"+",python,content
+194,177343,"main.py",630,0," ",python,content
+195,177654,"main.py",631,0,"1",python,content
