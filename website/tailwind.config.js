@@ -9,7 +9,7 @@ module.exports = {
     "./blog/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {}
   },
   darkMode: ["class", '[data-theme="dark"]'], // Support Docusaurus dark mode
   plugins: [],
